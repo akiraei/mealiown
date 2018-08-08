@@ -52,13 +52,16 @@ const Mutation = new GraphQLObjectType({
         name: { type: GraphQLString },
         pw: { type: GraphQLString }
       },
-      resolve(parent, args) {
-        let user = new User({
-          name: args.name,
-          pw: args.pw,
-          token: jwt.sign({ name: args.name, pw: args.pw }, "secret")
-        });
-        return user.save();
+      async resolve(parent, args) {
+        const value = await User.findOne({ name: args.name });
+        if (!value) {
+          let user = new User({
+            name: args.name,
+            pw: args.pw,
+            token: jwt.sign({ name: args.name }, "secret")
+          });
+          return user.save();
+        }
       }
     },
     token: {
@@ -69,6 +72,16 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         return User.findOne({ name: args.name, pw: args.pw });
+      }
+    },
+    sign: {
+      type: UserType,
+      args: {
+        token: { type: GraphQLString }
+      },
+      resolve(parent, args) {
+        let value = jwt.verify(args.token, "secret");
+        return { name: value.name };
       }
     }
   }
