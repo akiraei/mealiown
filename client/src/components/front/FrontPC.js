@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class FrontPC extends Component {
   render() {
     return (
       <React.Fragment>
-        <div>Welcome</div>
-        <div>meal - I - Own</div>
+        <Link to={localStorage.getItem("token") ? "/record" : "/login"}>
+          <div>Welcome</div>
+          <div>meal - I - Own</div>
+        </Link>
       </React.Fragment>
     );
   }

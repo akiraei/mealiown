@@ -10,6 +10,7 @@ import {
 
 import LoginPage from "./pages/LoginPage";
 import FrontPage from "./pages/FrontPage";
+import RecordPage from "./pages/RecordPage";
 
 // apollo client setup
 const client = new ApolloClient({
@@ -22,14 +23,16 @@ class App extends Component {
       <Router>
         <ApolloProvider client={client}>
           <Switch>
-            <Route path="/" component={FrontPage} />
+            <Route path="/front" component={FrontPage} />
             <Route path="/login" component={LoginPage} />
+            <Route path="/record" component={RecordPage} />
+
             <Route
               exact
               path="/"
               render={() =>
                 localStorage.getItem("token") ? (
-                  <Redirect to="/" />
+                  <Redirect to="/front" />
                 ) : (
                   <Redirect to="/login" />
                 )
