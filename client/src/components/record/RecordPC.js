@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Radio, Rate, DatePicker, TimePicker } from "antd";
+import { Radio, DatePicker, TimePicker } from "antd";
+import SliderPC from "./SliderPC";
 
 var moment = require("moment");
 
@@ -7,6 +8,8 @@ const { MonthPicker, RangePicker } = DatePicker;
 
 class RecordPC extends Component {
   render() {
+    const arr = ["calories", "balance", "tasty"];
+
     return (
       <React.Fragment>
         <div>
@@ -40,35 +43,14 @@ class RecordPC extends Component {
           <Radio.Button value={"Midnight"}>Midnight</Radio.Button>
         </Radio.Group>
 
-        <div>
-          {"Calories: "}
-          <Rate
-            onChange={e => {
-              this.props.onChange(e)("calories");
-            }}
-          />
-          {this.props.calories}
-        </div>
-
-        <div>
-          {"Balance: "}
-          <Rate
-            onChange={e => {
-              this.props.onChange(e)("balance");
-            }}
-          />
-          {this.props.balance}
-        </div>
-
-        <div>
-          {"Tasty: "}
-          <Rate
-            onChange={e => {
-              this.props.onChange(e)("tasty");
-            }}
-          />
-          {this.props.tasty}
-        </div>
+        {arr.map(element => (
+          <div key={element}>
+            <div>
+              <SliderPC {...this.props} category={element} />
+            </div>
+            <div>{element}</div>
+          </div>
+        ))}
       </React.Fragment>
     );
   }
