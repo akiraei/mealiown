@@ -1,16 +1,27 @@
 import React, { Component } from "react";
 import RecordPC from "./RecordPC";
+import { graphql } from "react-apollo";
+import { saveRecordMutation } from "../../queries/queries";
 
 var moment = require("moment");
 
 class RecordCC extends Component {
+  static defaultProps = {
+    ProfileCTX: {
+      state: {
+        username: "fds"
+      }
+    }
+  };
+
   state = {
     calories: 1,
     balance: 1,
     tasty: 1,
     category: "",
     date: moment().format("YYYY/MM/DD"),
-    tiem: moment().format("HH:mm")
+    time: moment().format("HH:mm"),
+    count: 1
   };
 
   pointFunc = v => {
@@ -48,9 +59,36 @@ class RecordCC extends Component {
       : this.setState({ [cate]: this.pointFunc(e) });
   };
 
+  handleSubmit = () => {
+    const value = {
+      name: this.props.ProfileCTX.state.username,
+      category: this.state.category,
+      date: this.state.date,
+      time: this.state.time,
+      calories: this.state.calories,
+      balance: this.state.balance,
+      tasty: this.state.tasty
+    };
+
+    console.log("submit value: ", value);
+    this.props.saveRecordMutation({
+      variables: {
+        ...value
+      }
+    });
+  };
+
   render() {
-    return <RecordPC {...this.state} onChange={this.handleChange} />;
+    return (
+      <RecordPC
+        {...this.state}
+        onChange={this.handleChange}
+        onSubmit={this.handleSubmit}
+      />
+    );
   }
 }
 
-export default RecordCC;
+export default graphql(saveRecordMutation, { name: "saveRecordMutation" })(
+  RecordCC
+);

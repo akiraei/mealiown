@@ -6,11 +6,11 @@ export default function wihtProfile(WrappedComponent) {
   return class extends Component {
     render() {
       return localStorage.getItem("token") ? (
-        <ProjectConsumer>
+        <ProfileConsumer>
           {({ ProfileCTX }) => (
             <WrappedComponent ProfileCTX={ProfileCTX} {...this.props} />
           )}
-        </ProjectConsumer>
+        </ProfileConsumer>
       ) : (
         <Redirect to="/login" />
       );

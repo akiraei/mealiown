@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RecordCC from "../components/record/RecordCC";
-import withProfile from "../hocs/WithProfile";
+import withProfile from "../hocs/withProfile";
 
 class RecordPage extends Component {
   render() {

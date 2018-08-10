@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { graphql } from "react-apollo";
-import { getTokenMutation } from "../queries/queries";
-
-var jwt = require("jsonwebtoken");
+import { graphql, compose } from "react-apollo";
+import { getTokenMutation, verifyTokenMutation } from "../queries/queries";
 
 const { Provider, Consumer } = React.createContext();
 
@@ -12,16 +10,21 @@ class ProfileProvider extends Component {
     logined: false
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     if (localStorage.getItem("token")) {
+      const res = await this.props.verifyTokenMutation({
+        variables: {
+          token: localStorage.getItem("token")
+        }
+      });
       this.setState({
-        username: jwt.verify(localStorage.getItem("token"), "secret").name,
-        logined: true,
+        username: res.data.sign.name,
+        logined: true
       });
     }
   };
 
-  login = async e => (name,pw) => {
+  login = async e => async (name, pw) => {
     const res = await this.props.getTokenMutation({
       variables: {
         name: name,
@@ -30,24 +33,29 @@ class ProfileProvider extends Component {
     });
     if (res.data.token.token) {
       localStorage.setItem("token", res.data.token.token);
-      this.setState({username: name, logined: true})
+      this.setState({ username: name, logined: true });
     }
   };
 
   logout = () => {
-       localStorage.removeItem('token');
-      this.setState({username: "", logined: false})
+    localStorage.removeItem("token");
+    this.setState({ username: "", logined: false });
   };
 
   render() {
     const value = {
-        ProfileCTX: {
-            state:this.state,
-            func: { login: this.login, logout: this.logout }
-        }
+      ProfileCTX: {
+        state: this.state,
+        func: { login: this.login, logout: this.logout }
+      }
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }
 }
 
-export { ProfileProvider, Consumer as ProfileConsumer };
+const aaaa = compose(
+  graphql(getTokenMutation, { name: "getTokenMutation" }),
+  graphql(verifyTokenMutation, { name: "verifyTokenMutation" })
+)(ProfileProvider);
+
+export { aaaa as ProfileProvider, Consumer as ProfileConsumer };

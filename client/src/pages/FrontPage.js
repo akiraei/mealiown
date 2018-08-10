@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import FrontCC from "../components/front/FrontCC";
-import withProfile from "../hocs/WithProfile";
 class FrontPage extends Component {
   render() {
     return (
@@ -11,4 +10,4 @@ class FrontPage extends Component {
   }
 }
 
-export default withProfile(FrontPage);
+export default FrontPage;

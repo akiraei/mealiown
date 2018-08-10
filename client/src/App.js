@@ -22,8 +22,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <ProfileProvider>
-          <ApolloProvider client={client}>
+        <ApolloProvider client={client}>
+          <ProfileProvider>
             <Switch>
               <Route path="/front" component={FrontPage} />
               <Route path="/login" component={LoginPage} />
@@ -34,15 +34,15 @@ class App extends Component {
                 path="/"
                 render={() =>
                   localStorage.getItem("token") ? (
-                    <Redirect to="/front" />
+                    <Redirect to="/record" />
                   ) : (
-                    <Redirect to="/login" />
+                    <Redirect to="/front" />
                   )
                 }
               />
             </Switch>
-          </ApolloProvider>
-        </ProfileProvider>
+          </ProfileProvider>
+        </ApolloProvider>
       </Router>
     );
   }
