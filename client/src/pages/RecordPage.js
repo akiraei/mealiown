@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RecordCC from "../components/record/RecordCC";
+import withProfile from "../hocs/WithProfile";
 
 class RecordPage extends Component {
   render() {
@@ -11,4 +12,4 @@ class RecordPage extends Component {
   }
 }
 
-export default RecordPage;
+export default withProfile(RecordPage);

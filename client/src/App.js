@@ -8,6 +8,7 @@ import {
   Redirect
 } from "react-router-dom";
 
+import { ProfileProvider } from "./contexts/ProfileCTX";
 import LoginPage from "./pages/LoginPage";
 import FrontPage from "./pages/FrontPage";
 import RecordPage from "./pages/RecordPage";
@@ -21,28 +22,42 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <ApolloProvider client={client}>
-          <Switch>
-            <Route path="/front" component={FrontPage} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/record" component={RecordPage} />
+        <ProfileProvider>
+          <ApolloProvider client={client}>
+            <Switch>
+              <Route path="/front" component={FrontPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/record" component={RecordPage} />
 
-            <Route
-              exact
-              path="/"
-              render={() =>
-                localStorage.getItem("token") ? (
-                  <Redirect to="/front" />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              }
-            />
-          </Switch>
-        </ApolloProvider>
+              <Route
+                exact
+                path="/"
+                render={() =>
+                  localStorage.getItem("token") ? (
+                    <Redirect to="/front" />
+                  ) : (
+                    <Redirect to="/login" />
+                  )
+                }
+              />
+            </Switch>
+          </ApolloProvider>
+        </ProfileProvider>
       </Router>
     );
   }
 }
 
 export default App;
+
+// import ApolloClient from "apollo-boost";
+// import { defaults, resolvers } from "./resolvers";
+
+// const client = new ApolloClient({
+//   uri: `https://nx9zvp49q7.lp.gql.zone/graphql`,
+//   clientState: {
+//     defaults,
+//     resolvers,
+//     typeDefs
+//   }
+// });

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import LoginCC from "../components/login/LoginCC";
+import withProfile from "../hocs/WithProfile";
 
 class LoginPage extends Component {
   render() {
@@ -11,4 +12,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default withProfile(LoginPage);
