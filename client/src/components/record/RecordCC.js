@@ -21,7 +21,8 @@ class RecordCC extends Component {
     category: "",
     date: moment().format("YYYY/MM/DD"),
     time: moment().format("HH:mm"),
-    count: 1
+    count: 1,
+    memo: ""
   };
 
   pointFunc = v => {
@@ -67,7 +68,8 @@ class RecordCC extends Component {
       time: this.state.time,
       calories: this.state.calories,
       balance: this.state.balance,
-      tasty: this.state.tasty
+      tasty: this.state.tasty,
+      memo: this.state.memo
     };
 
     console.log("submit value: ", value);

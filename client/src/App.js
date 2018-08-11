@@ -12,6 +12,8 @@ import { ProfileProvider } from "./contexts/ProfileCTX";
 import LoginPage from "./pages/LoginPage";
 import FrontPage from "./pages/FrontPage";
 import RecordPage from "./pages/RecordPage";
+import MainPage from "./pages/MainPage";
+import DashboardPage from "./pages/DashboardPage";
 
 // apollo client setup
 const client = new ApolloClient({
@@ -25,21 +27,23 @@ class App extends Component {
         <ApolloProvider client={client}>
           <ProfileProvider>
             <Switch>
-              <Route path="/front" component={FrontPage} />
+              <Route exact path="/" component={FrontPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/record" component={RecordPage} />
+              <Route path="/main" component={MainPage} />
+              <Route path="/dashboard" component={DashboardPage} />
 
-              <Route
+              {/* <Route
                 exact
                 path="/"
                 render={() =>
                   localStorage.getItem("token") ? (
-                    <Redirect to="/record" />
+                    <Redirect to="/main" />
                   ) : (
                     <Redirect to="/front" />
                   )
                 }
-              />
+              /> */}
             </Switch>
           </ProfileProvider>
         </ApolloProvider>

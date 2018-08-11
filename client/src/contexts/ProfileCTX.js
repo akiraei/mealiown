@@ -45,7 +45,7 @@ class ProfileProvider extends Component {
   render() {
     const value = {
       ProfileCTX: {
-        state: this.state,
+        state: { ...this.state },
         func: { login: this.login, logout: this.logout }
       }
     };
@@ -53,9 +53,9 @@ class ProfileProvider extends Component {
   }
 }
 
-const aaaa = compose(
+const provider = compose(
   graphql(getTokenMutation, { name: "getTokenMutation" }),
   graphql(verifyTokenMutation, { name: "verifyTokenMutation" })
 )(ProfileProvider);
 
-export { aaaa as ProfileProvider, Consumer as ProfileConsumer };
+export { provider as ProfileProvider, Consumer as ProfileConsumer };

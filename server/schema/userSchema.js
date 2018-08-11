@@ -36,7 +36,8 @@ const RecordType = new GraphQLObjectType({
     calories: { type: GraphQLInt },
     balance: { type: GraphQLInt },
     tasty: { type: GraphQLInt },
-    sum: { type: GraphQLInt }
+    sum: { type: GraphQLInt },
+    memo: { type: GraphQLString }
   })
 });
 
@@ -54,6 +55,13 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(UserType),
       resolve(parent, args) {
         return User.find({});
+      }
+    },
+    recordData: {
+      type: new GraphQLList(RecordType),
+      args: { name: { type: GraphQLString } },
+      resolve(parent, args) {
+        return Record.find({ name: args.name });
       }
     }
   }
@@ -109,7 +117,8 @@ const Mutation = new GraphQLObjectType({
         time: { type: GraphQLString },
         calories: { type: GraphQLInt },
         balance: { type: GraphQLInt },
-        tasty: { type: GraphQLInt }
+        tasty: { type: GraphQLInt },
+        memo: { type: GraphQLString }
       },
       async resolve(parent, args) {
         const value = await Record.find({ name: args.name });
@@ -128,12 +137,24 @@ const Mutation = new GraphQLObjectType({
           calories: args.calories,
           balance: args.balance,
           tasty: args.tasty,
+          memo: args.memo,
           sum:
             args.calories + args.balance + args.tasty > 1000
               ? 1000
               : args.calories + args.balance + args.tasty
         });
         return payload.save();
+      }
+    },
+    getRecord: {
+      type: new GraphQLList(RecordType),
+      args: {
+        name: { type: GraphQLString }
+      },
+      async resolve(parent, args) {
+        const arr = await Record.find({ name: args.name });
+        console.log("arr: ", arr);
+        return arr;
       }
     }
   }

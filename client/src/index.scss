@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css?family=Julius+Sans+One");
+
+// Global : mixin, variables, function
+// @import 'stylesheet/variables/color';
+
+$font-stack: "Julius Sans One", sans-serif;
+
+// reset
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+#root {
+  width: 100%;
+  height: 100%;
+}
+.App {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+// component styling
+// @import 'stylesheet/members';
+// @import 'stylesheet/label';
+// @import 'stylesheet/card';
+// @import 'stylesheet/modal';
+
+// @import 'stylesheet/sidenav';
+@import "stylesheet/header";
+// @import 'stylesheet/layout';
+
+// page styleing
+// @import 'stylesheet/login_page';
+
+//timeline styling
+// @import 'stylesheet/timeline';
