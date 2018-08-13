@@ -84,6 +84,7 @@ class RecordCC extends Component {
     return (
       <RecordPC
         {...this.state}
+        {...this.props}
         onChange={this.handleChange}
         onSubmit={this.handleSubmit}
       />

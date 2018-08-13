@@ -1,11 +1,23 @@
 import React, { Component } from "react";
 import HeaderPC from "./HeaderPC";
-import { graphql } from "react-apollo";
-import { getTokenMutation } from "../../queries/queries";
+import { Redirect } from "react-router-dom";
 
 class HeaderCC extends Component {
+  state = {
+    sign: true
+  };
+
+  handleLogout = () => {
+    localStorage.removeItem("token");
+    this.setState({ sign: false });
+  };
+
   render() {
-    return <HeaderPC />;
+    return this.state.sign ? (
+      <HeaderPC {...this.props} onLogout={this.handleLogout} />
+    ) : (
+      <Redirect to={"./record"} />
+    );
   }
 }
 

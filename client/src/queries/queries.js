@@ -1,5 +1,14 @@
 import { gql } from "apollo-boost";
 
+const saveUserMutation = gql`
+  mutation SaveUser($name: String, $pw: String) {
+    addUser(name: $name, pw: $pw) {
+      name
+      token
+    }
+  }
+`;
+
 const getTokenMutation = gql`
   mutation GetToken($name: String, $pw: String) {
     token(name: $name, pw: $pw) {
@@ -87,5 +96,6 @@ export {
   verifyTokenMutation,
   saveRecordMutation,
   getRecordData,
-  getRecordMutation
+  getRecordMutation,
+  saveUserMutation
 };

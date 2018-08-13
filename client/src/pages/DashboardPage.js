@@ -1,15 +1,28 @@
 import React, { Component } from "react";
 import DashboardCC from "../components/dashboard/DashboardCC";
-import withProfile from "../hocs/withProfile";
+import HeaderCC from "../components/header/HeaderCC";
+
+import withToken from "../hocs/withToken";
+
+import { Layout } from "antd";
+
+const { Header, Footer, Sider, Content } = Layout;
 
 class DashboardPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <DashboardCC {...this.props} />
+        <Layout>
+          <Header className={"header"}>
+            <HeaderCC {...this.props} />
+          </Header>
+          <Content>
+            <DashboardCC {...this.props} />
+          </Content>
+        </Layout>
       </React.Fragment>
     );
   }
 }
 
-export default withProfile(DashboardPage);
+export default withToken(DashboardPage);

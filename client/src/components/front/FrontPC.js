@@ -5,7 +5,7 @@ class FrontPC extends Component {
   render() {
     return (
       <React.Fragment>
-        <Link to={localStorage.getItem("token") ? "/main" : "/login"}>
+        <Link to={localStorage.getItem("token") ? "/record" : "/login"}>
           <div>Welcome</div>
           <div>meal - I - Own</div>
         </Link>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Icon } from "antd";
+import { Link } from "react-router-dom";
 
 class HeaderPC extends Component {
   render() {
@@ -8,15 +9,25 @@ class HeaderPC extends Component {
         <Row className={"header-row"} gutter={16}>
           <Col className={"header-col"} span={3}>
             <div>
-              {false ? <Icon type="dashboard" /> : <Icon type="form" />}
+              {this.props.match.url === "/record" ? (
+                <Link to={"/dashboard"}>
+                  <Icon type="dashboard" />
+                </Link>
+              ) : (
+                <Link to={"/record"}>
+                  <Icon type="form" />
+                </Link>
+              )}
             </div>
           </Col>
           <Col className={"header-col"} span={18}>
-            <div>{false ? "Dashboard" : "Record"}</div>
+            <div>
+              {this.props.match.url !== "/record" ? "Dashboard" : "Record"}
+            </div>
           </Col>
           <Col className={"header-col"} span={3}>
             <div>
-              <Icon type="logout" />
+              <Icon type="logout" onClick={this.props.onLogout} />
             </div>
           </Col>
         </Row>

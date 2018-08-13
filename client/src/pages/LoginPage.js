@@ -5,7 +5,7 @@ class LoginPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <LoginCC />
+        <LoginCC {...this.props} />
       </React.Fragment>
     );
   }

@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import LoginPC from "./LoginPC";
+import SignupPC from "./SignupPC";
 import { graphql } from "react-apollo";
-import { getTokenMutation } from "../../queries/queries";
-import withProfile from "../../hocs/withProfile";
+import { saveUserMutation } from "../../queries/queries";
 import { Redirect } from "react-router-dom";
 
-class LoginCC extends Component {
+class SignupCC extends Component {
   state = {
     name: "",
     pw: "",
-    success: false
+    logined: false
   };
 
   handleChangeName = e => {
@@ -20,24 +19,24 @@ class LoginCC extends Component {
     this.setState({ pw: e.target.value });
   };
 
-  handleSubmit = async () => {
-    const res = await this.props.getTokenMutation({
+  handleSubmit = async (name, pw) => {
+    const res = await this.props.saveUserMutation({
       variables: {
-        name: this.state.name,
-        pw: this.state.pw
+        name,
+        pw
       }
     });
-    if (res.data.token) {
-      localStorage.setItem("token", res.data.token.token);
-      this.setState({ success: true });
+    if (res.data.addUser) {
+      localStorage.setItem("token", res.data.addUser.token);
+      this.setState({ username: name, logined: true });
     }
   };
 
   render() {
-    return localStorage.getItem("token") ? (
+    return this.state.logined ? (
       <Redirect to={"/record"} />
     ) : (
-      <LoginPC
+      <SignupPC
         {...this.props}
         onChangeName={this.handleChangeName}
         onChangePw={this.handleChangePw}
@@ -47,4 +46,6 @@ class LoginCC extends Component {
   }
 }
 
-export default graphql(getTokenMutation, { name: "getTokenMutation" })(LoginCC);
+export default graphql(saveUserMutation, { name: "saveUserMutation" })(
+  SignupCC
+);

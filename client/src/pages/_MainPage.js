@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MainCC from "../components/main/MainCC";
-import withProfile from "../hocs/withProfile";
+import withToken from "../hocs/withToken";
 
 class MainPage extends Component {
   render() {
@@ -12,4 +12,4 @@ class MainPage extends Component {
   }
 }
 
-export default withProfile(MainPage);
+export default withToken(MainPage);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RecordCC from "../components/record/RecordCC";
 import HeaderCC from "../components/header/HeaderCC";
-import withProfile from "../hocs/withProfile";
+import withToken from "../hocs/withToken";
 
 import { Layout } from "antd";
 
@@ -13,10 +13,10 @@ class RecordPage extends Component {
       <React.Fragment>
         <Layout>
           <Header className={"header"}>
-            <HeaderCC />
+            <HeaderCC {...this.props} />
           </Header>
           <Content>
-            <RecordCC />
+            <RecordCC {...this.props} />
           </Content>
         </Layout>
       </React.Fragment>
@@ -24,4 +24,4 @@ class RecordPage extends Component {
   }
 }
 
-export default withProfile(RecordPage);
+export default withToken(RecordPage);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DashboardPC from "./DashboardPC";
 import { graphql } from "react-apollo";
 import { getRecordMutation } from "../../queries/queries";
+import withProfile from "../../hocs/withProfile";
 
 class DashboardCC extends Component {
   state = {
@@ -17,6 +18,7 @@ class DashboardCC extends Component {
         name: this.props.ProfileCTX.state.username
       }
     });
+    console.log("dash res", res.data);
     const arr = res.data.getRecord;
     const count = arr.length
       ? res.data.getRecord.sort((a, b) => b.count - a.count)[0].count
@@ -29,7 +31,6 @@ class DashboardCC extends Component {
       count && parseInt(arr.reduce((acu, cv) => acu + cv.tasty, 0) / count);
     const sumAvg =
       count && parseInt(arr.reduce((acu, cv) => acu + cv.sum, 0) / count);
-    console.log("son of bitch", calAvg, balAvg, tastyAvg, sumAvg);
     this.setState({ count, calAvg, balAvg, tastyAvg, sumAvg });
   };
 
@@ -39,5 +40,5 @@ class DashboardCC extends Component {
 }
 
 export default graphql(getRecordMutation, { name: "getRecordMutation" })(
-  DashboardCC
+  withProfile(DashboardCC)
 );

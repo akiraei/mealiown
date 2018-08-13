@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class LoginPC extends Component {
+class SignupPC extends Component {
   render() {
     return (
       <React.Fragment>
@@ -15,4 +15,4 @@ class LoginPC extends Component {
   }
 }
 
-export default LoginPC;
+export default SignupPC;

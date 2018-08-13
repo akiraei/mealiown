@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { graphql, compose } from "react-apollo";
-import { getTokenMutation, verifyTokenMutation } from "../queries/queries";
+import { graphql } from "react-apollo";
+import { Redirect } from "react-router-dom";
+import { verifyTokenMutation } from "../queries/queries";
 
 const { Provider, Consumer } = React.createContext();
 
 class ProfileProvider extends Component {
   state = {
-    username: "",
-    logined: false
+    username: ""
   };
 
   componentDidMount = async () => {
@@ -17,45 +17,29 @@ class ProfileProvider extends Component {
           token: localStorage.getItem("token")
         }
       });
+      console.log("nooooog", res.data.sign);
       this.setState({
-        username: res.data.sign.name,
-        logined: true
+        username: res.data.sign.name
+      });
+    } else {
+      this.setState({
+        username: ""
       });
     }
-  };
-
-  login = async e => async (name, pw) => {
-    const res = await this.props.getTokenMutation({
-      variables: {
-        name: name,
-        pw: pw
-      }
-    });
-    if (res.data.token.token) {
-      localStorage.setItem("token", res.data.token.token);
-      this.setState({ username: name, logined: true });
-    }
-  };
-
-  logout = () => {
-    localStorage.removeItem("token");
-    this.setState({ username: "", logined: false });
   };
 
   render() {
     const value = {
       ProfileCTX: {
-        state: { ...this.state },
-        func: { login: this.login, logout: this.logout }
+        state: { ...this.state }
       }
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }
 }
 
-const provider = compose(
-  graphql(getTokenMutation, { name: "getTokenMutation" }),
-  graphql(verifyTokenMutation, { name: "verifyTokenMutation" })
-)(ProfileProvider);
+const provider = graphql(verifyTokenMutation, { name: "verifyTokenMutation" })(
+  ProfileProvider
+);
 
 export { provider as ProfileProvider, Consumer as ProfileConsumer };
