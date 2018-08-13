@@ -10,6 +10,7 @@ import {
 
 import { ProfileProvider } from "./contexts/ProfileCTX";
 import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 import FrontPage from "./pages/FrontPage";
 import RecordPage from "./pages/RecordPage";
 // import MainPage from "./pages/MainPage";
@@ -29,6 +30,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={FrontPage} />
               <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignupPage} />
               <Route path="/record" component={RecordPage} />
               {/* <Route path="/main" component={MainPage} /> */}
               <Route path="/dashboard" component={DashboardPage} />

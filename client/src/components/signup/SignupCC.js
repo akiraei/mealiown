@@ -19,21 +19,21 @@ class SignupCC extends Component {
     this.setState({ pw: e.target.value });
   };
 
-  handleSubmit = async (name, pw) => {
+  handleSubmit = async () => {
     const res = await this.props.saveUserMutation({
       variables: {
-        name,
-        pw
+        name: this.state.name,
+        pw: this.state.pw
       }
     });
     if (res.data.addUser) {
       localStorage.setItem("token", res.data.addUser.token);
-      this.setState({ username: name, logined: true });
+      this.setState({ logined: true });
     }
   };
 
   render() {
-    return this.state.logined ? (
+    return localStorage.getItem("token") || this.state.logined ? (
       <Redirect to={"/record"} />
     ) : (
       <SignupPC

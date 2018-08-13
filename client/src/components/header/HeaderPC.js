@@ -22,6 +22,8 @@ class HeaderPC extends Component {
           </Col>
           <Col className={"header-col"} span={18}>
             <div>
+              {this.props.ProfileCTX.state.username}
+              {"'s "}
               {this.props.match.url !== "/record" ? "Dashboard" : "Record"}
             </div>
           </Col>

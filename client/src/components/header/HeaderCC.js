@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import HeaderPC from "./HeaderPC";
 import { Redirect } from "react-router-dom";
-
+import withProfile from "../../hocs/withProfile";
 class HeaderCC extends Component {
   state = {
     sign: true
@@ -21,4 +21,4 @@ class HeaderCC extends Component {
   }
 }
 
-export default HeaderCC;
+export default withProfile(HeaderCC);
