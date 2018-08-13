@@ -153,7 +153,6 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(parent, args) {
         const arr = await Record.find({ name: args.name });
-        console.log("arr: ", arr);
         return arr;
       }
     }

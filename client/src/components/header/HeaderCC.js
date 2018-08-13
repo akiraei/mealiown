@@ -10,6 +10,7 @@ class HeaderCC extends Component {
   handleLogout = () => {
     localStorage.removeItem("token");
     this.setState({ sign: false });
+    this.props.ProfileCTX.func.setUsername("");
   };
 
   render() {

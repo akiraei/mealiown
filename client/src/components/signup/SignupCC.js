@@ -29,6 +29,7 @@ class SignupCC extends Component {
     if (res.data.addUser) {
       localStorage.setItem("token", res.data.addUser.token);
       this.setState({ logined: true });
+      this.props.ProfileCTX.func.setUsername(this.state.name);
     }
   };
 

@@ -17,7 +17,6 @@ class ProfileProvider extends Component {
           token: localStorage.getItem("token")
         }
       });
-      console.log("nooooog", res.data.sign);
       this.setState({
         username: res.data.sign.name
       });
@@ -28,10 +27,16 @@ class ProfileProvider extends Component {
     }
   };
 
+  setUsername = name => {
+    console.log("set username");
+    this.setState({ username: name });
+  };
+
   render() {
     const value = {
       ProfileCTX: {
-        state: { ...this.state }
+        state: { ...this.state },
+        func: { setUsername: this.setUsername }
       }
     };
     return <Provider value={value}>{this.props.children}</Provider>;

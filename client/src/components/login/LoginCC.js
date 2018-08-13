@@ -30,6 +30,7 @@ class LoginCC extends Component {
     if (res.data.token) {
       localStorage.setItem("token", res.data.token.token);
       this.setState({ success: true });
+      this.props.ProfileCTX.func.setUsername(this.state.name);
     }
   };
 
@@ -47,4 +48,6 @@ class LoginCC extends Component {
   }
 }
 
-export default graphql(getTokenMutation, { name: "getTokenMutation" })(LoginCC);
+export default graphql(getTokenMutation, { name: "getTokenMutation" })(
+  withProfile(LoginCC)
+);
