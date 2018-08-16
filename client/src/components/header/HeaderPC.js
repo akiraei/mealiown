@@ -4,32 +4,60 @@ import { Link } from "react-router-dom";
 
 class HeaderPC extends Component {
   render() {
+    const url = this.props.match.url;
+    const username = this.props.ProfileCTX.state.username;
+    const component = url.slice(1, 2).toUpperCase() + url.slice(2);
+    const switcher = () => {
+      switch (url) {
+        case "/record":
+          return {
+            title: username + "'s " + component,
+            url: "/dashboard",
+            icon: "dashboard"
+          };
+        case "/dashboard":
+          return {
+            title: username + "'s " + component,
+            url: "/record",
+            icon: "form"
+          };
+        case "/signup":
+          return {
+            title: component,
+            url: "/login",
+            icon: "login"
+          };
+        case "/login":
+          return {
+            title: component,
+            url: "/signup",
+            icon: "user-add"
+          };
+        default:
+          return "";
+      }
+    };
+
     return (
       <React.Fragment>
         <Row className={"header-row"} gutter={16}>
           <Col className={"header-col"} span={3}>
             <div>
-              {this.props.match.url === "/record" ? (
-                <Link to={"/dashboard"}>
-                  <Icon type="dashboard" />
-                </Link>
-              ) : (
-                <Link to={"/record"}>
-                  <Icon type="form" />
-                </Link>
-              )}
+              <Link to={switcher().url}>
+                <Icon type={switcher().icon} />
+              </Link>
             </div>
           </Col>
           <Col className={"header-col"} span={18}>
-            <div>
-              {this.props.ProfileCTX.state.username}
-              {"'s "}
-              {this.props.match.url !== "/record" ? "Dashboard" : "Record"}
-            </div>
+            <div>{switcher().title}</div>
           </Col>
           <Col className={"header-col"} span={3}>
             <div>
-              <Icon type="logout" onClick={this.props.onLogout} />
+              {url === "/record" || url === "/dashboard" ? (
+                <Icon type="logout" onClick={this.props.onLogout} />
+              ) : (
+                ""
+              )}
             </div>
           </Col>
         </Row>

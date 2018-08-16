@@ -12,85 +12,221 @@ class RecordPC extends Component {
 
     return (
       <React.Fragment>
-        <Row className={"record-date-row"}>
-          <Col span={12}>
-            <DatePicker
-              defaultValue={moment()}
-              format={"YYYY/MM/DD"}
-              onChange={e => {
-                this.props.onChange(e)("date");
-              }}
-            />
-          </Col>
-          <Col span={12}>
-            <TimePicker
-              defaultValue={moment()}
-              format={"HH:mm"}
-              onChange={e => {
-                this.props.onChange(e)("time");
-              }}
-            />
-          </Col>
-        </Row>
+        <div className={"record-container flex column"}>
+          <div className={"record-box green-yellow-bgc flex column"}>
+            <Row
+              type="flex"
+              justify="center"
+              align="center"
+              className={"record-date-row"}
+            >
+              <Col span={12}>
+                <DatePicker
+                  className={"record-date-date"}
+                  defaultValue={moment()}
+                  format={"YYYY/MM/DD"}
+                  onChange={e => {
+                    this.props.onChange(e)("date");
+                  }}
+                />
+              </Col>
+            </Row>
+            <Row
+              type="flex"
+              justify="center"
+              align="center"
+              className={"record-date-row"}
+            >
+              <Col span={12}>
+                <TimePicker
+                  className={"record-date-time"}
+                  defaultValue={moment()}
+                  format={"HH:mm"}
+                  onChange={e => {
+                    this.props.onChange(e)("time");
+                  }}
+                />
+              </Col>
+            </Row>
 
-        <Radio.Group
-          onChange={e => {
-            this.props.onChange(e)("category");
-          }}
-          buttonstyle={"solid"}
-        >
-          <Row className={"record-radio-row"}>
-            <div>
-              <Radio.Button value={"Breakfast"}>Breakfast</Radio.Button>
-              <Radio.Button value={"Brunch"}>Brunch</Radio.Button>
-              <Radio.Button value={"Lunch"}>Lunch</Radio.Button>
+            <div className={"record-radio-box"}>
+              <Radio.Group
+                className={"flex column"}
+                onChange={e => {
+                  this.props.onChange(e)("category");
+                }}
+                buttonstyle={"solid"}
+              >
+                <Row className={"record-radio-row"}>
+                  <Row
+                    type="flex"
+                    justify="center"
+                    align="center"
+                    className={"record-radio-element"}
+                  >
+                    <Col>
+                      <Radio.Button
+                        className={"record-radio-element-button flex"}
+                        value={"Breakfast"}
+                      >
+                        Breakfast
+                      </Radio.Button>
+                    </Col>
+                  </Row>
+                  <Row
+                    type="flex"
+                    justify="center"
+                    align="center"
+                    className={"record-radio-element"}
+                  >
+                    <Col>
+                      <Radio.Button
+                        className={"record-radio-element-button flex"}
+                        value={"Brunch"}
+                      >
+                        Brunch
+                      </Radio.Button>
+                    </Col>
+                  </Row>
+                  <Row
+                    type="flex"
+                    justify="center"
+                    align="center"
+                    className={"record-radio-element"}
+                  >
+                    <Col>
+                      <Radio.Button
+                        className={"record-radio-element-button flex"}
+                        value={"Lunch"}
+                      >
+                        Lunch
+                      </Radio.Button>
+                    </Col>
+                  </Row>
+                  <Row
+                    type="flex"
+                    justify="center"
+                    align="center"
+                    className={"record-radio-element"}
+                  >
+                    <Col>
+                      <Radio.Button
+                        className={"record-radio-element-button flex"}
+                        value={"Snack"}
+                      >
+                        Snack
+                      </Radio.Button>
+                    </Col>
+                  </Row>
+                  <Row
+                    type="flex"
+                    justify="center"
+                    align="center"
+                    className={"record-radio-element"}
+                  >
+                    <Col>
+                      <Radio.Button
+                        className={"record-radio-element-button flex"}
+                        value={"Dinner"}
+                      >
+                        Dinner
+                      </Radio.Button>
+                    </Col>
+                  </Row>
+                  <Row
+                    type="flex"
+                    justify="center"
+                    align="center"
+                    className={"record-radio-element"}
+                  >
+                    <Col>
+                      <Radio.Button
+                        className={"record-radio-element-button flex"}
+                        value={"Midnight"}
+                      >
+                        Midnight
+                      </Radio.Button>
+                    </Col>
+                  </Row>
+                </Row>
+              </Radio.Group>
             </div>
-            <div>
-              <Radio.Button value={"Snack"}>Snack</Radio.Button>
-              <Radio.Button value={"Dinner"}>Dinner</Radio.Button>
-              <Radio.Button value={"Midnight"}>Midnight</Radio.Button>
-            </div>
-          </Row>
-        </Radio.Group>
+          </div>
 
-        <Row>
-          {arr.map(element => (
-            <Col span={8} key={element}>
-              <div>
-                <SliderPC {...this.props} category={element} />
+          <div className={"record-box yellow-blue-bgc"}>
+            <div className={"slider-container"}>
+              <Row>
+                {arr.map(element => (
+                  <Col span={8} key={element}>
+                    <div>
+                      <SliderPC {...this.props} category={element} />
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+
+              <Row
+                type="flex"
+                justify="center"
+                align="center"
+                className={"slider-sum"}
+              >
+                <Col>
+                  <div>
+                    {this.props.calories +
+                      this.props.balance +
+                      this.props.tasty >
+                    1000
+                      ? "Sum: Pt. Over 1000!"
+                      : "Sum: Pt. " +
+                        (
+                          this.props.calories +
+                          this.props.balance +
+                          this.props.tasty
+                        ).toString()}
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          </div>
+
+          <div className={"record-box blue-violet-bgc"}>
+            <div className={"result"}>
+              {/* <div>#{this.props.count}</div> */}
+              <div className={"result-row"}>Date: {this.props.date}</div>
+              <div className={"result-row"}>Time: {this.props.time}</div>
+              <div className={"result-row"}>Meal: {this.props.category}</div>
+              <div className={"result-row"}>
+                Calories: {this.props.calories}
               </div>
-              <div>{element}</div>
-            </Col>
-          ))}
-        </Row>
-
-        <div>
-          {this.props.calories + this.props.balance + this.props.tasty > 1000
-            ? "Over 1000"
-            : this.props.calories + this.props.balance + this.props.tasty}
-        </div>
-
-        <div>
-          {/* <div>#{this.props.count}</div> */}
-          <div>Date: {this.props.date}</div>
-          <div>Time: {this.props.time}</div>
-          <div>Meal: {this.props.category}</div>
-          <div>Calories: {this.props.calories}</div>
-          <div>Balance: {this.props.balance}</div>
-          <div>Tasty: {this.props.tasty}</div>
-          <div>
-            Sum:{" "}
-            {this.props.calories + this.props.balance + this.props.tasty > 1000
-              ? 1000
-              : this.props.calories + this.props.balance + this.props.tasty}
+              <div className={"result-row"}>Balance: {this.props.balance}</div>
+              <div className={"result-row"}>Tasty: {this.props.tasty}</div>
+              <div className={"result-row"}>
+                Sum:{" "}
+                {this.props.calories + this.props.balance + this.props.tasty >
+                1000
+                  ? 1000
+                  : this.props.calories + this.props.balance + this.props.tasty}
+              </div>
+              <div className={"result-row"}>
+                Memo
+                <Input.TextArea autosize={{ minRows: 8, maxRows: 8 }} />
+              </div>
+              <div className={"result-row"}>
+                <Row type="flex" justify="center" align="top">
+                  <Col>
+                    <Button
+                      disabled={!this.props.category}
+                      onClick={this.props.onSubmit}
+                      className={"result-button"}
+                    >
+                      Submit
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
+            </div>
           </div>
-          <div>
-            memo
-            <Input.TextArea row={4} />
-          </div>
-          <Button disabled={!this.props.category} onClick={this.props.onSubmit}>
-            Submit
-          </Button>
         </div>
       </React.Fragment>
     );

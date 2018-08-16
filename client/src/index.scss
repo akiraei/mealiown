@@ -26,6 +26,22 @@ body {
   height: 100%;
 }
 
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.align {
+  align-content: center;
+}
+
+.justify {
+  justify-content: space-between;
+}
+
 // component styling
 // @import 'stylesheet/members';
 // @import 'stylesheet/label';
@@ -34,6 +50,8 @@ body {
 
 // @import 'stylesheet/sidenav';
 @import "stylesheet/header";
+@import "stylesheet/record";
+
 // @import 'stylesheet/layout';
 
 // page styleing

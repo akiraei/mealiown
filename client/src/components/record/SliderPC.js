@@ -1,15 +1,10 @@
 import React, { Component } from "react";
-import { Slider } from "antd";
+import { Slider, Row, Col } from "antd";
 
 class SliderPC extends Component {
   render() {
     const style = {
       height: 100
-    };
-
-    const marks = {
-      0: "1",
-      100: "1000"
     };
 
     function formatter(value) {
@@ -43,17 +38,54 @@ class SliderPC extends Component {
 
     return (
       <React.Fragment>
-        <div style={style}>
-          <Slider
-            tipFormatter={formatter}
-            vertical
-            step={10}
-            marks={marks}
-            onChange={e => {
-              this.props.onChange(e)(this.props.category);
-            }}
-          />
-        </div>
+        <Row
+          type="flex"
+          justify="center"
+          align="center"
+          className={"slider-1000"}
+        >
+          <Col>
+            <div>Lv.10</div>
+          </Col>
+        </Row>
+
+        <Row
+          type="flex"
+          justify="center"
+          align="center"
+          className={"slider-bar"}
+        >
+          <Col>
+            <div>
+              <Slider
+                className={"slider-self"}
+                tipFormatter={formatter}
+                vertical
+                step={10}
+                onChange={e => {
+                  this.props.onChange(e)(this.props.category);
+                }}
+              />
+            </div>
+          </Col>
+        </Row>
+
+        <Row type="flex" justify="center" align="center" className={"slider-1"}>
+          <Col>
+            <div>Lv.1</div>
+          </Col>
+        </Row>
+
+        <Row
+          type="flex"
+          justify="center"
+          align="center"
+          className={"slider-category"}
+        >
+          <Col>
+            <div>{this.props.category}</div>
+          </Col>
+        </Row>
       </React.Fragment>
     );
   }

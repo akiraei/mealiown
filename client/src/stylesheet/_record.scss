@@ -1,0 +1,97 @@
+.record {
+  &-container {
+    align-items: center;
+    margin-top: 64px;
+  }
+  &-box {
+    padding: 50px 20px 50px 20px;
+    width: 100vw;
+    height: calc(100vh - 64px);
+  }
+  &-date {
+    &-row {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    &-date {
+      width: 100%;
+    }
+    &-time {
+      width: 100%;
+    }
+  }
+  &-radio {
+    &-box {
+      margin-top: 40px;
+    }
+    &-element {
+      padding: 10px;
+      &-button {
+        width: 40vw;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.slider {
+  &-container {
+    margin: 20px;
+  }
+  &-1000 {
+    padding: 10px;
+  }
+  &-1 {
+    padding: 10px;
+  }
+  &-sum {
+    margin: 30px;
+  }
+  &-self {
+    height: 50vh;
+  }
+}
+
+.result {
+  &-row {
+    margin: 15px;
+  }
+  &-button {
+    margin-top: 35px;
+    width: 150px;
+  }
+}
+
+.ant-slider {
+  &-track {
+    width: 12px;
+    background: linear-gradient(rgb(145, 213, 255), rgb(255, 221, 221), white);
+  }
+}
+
+.green-yellow-bgc {
+  background: linear-gradient(
+    rgb(230, 255, 234),
+    rgb(254, 254, 254),
+    rgb(254, 254, 254),
+    rgb(255, 255, 228)
+  );
+}
+
+.yellow-blue-bgc {
+  background: linear-gradient(
+    rgb(255, 255, 228),
+    rgb(254, 254, 254),
+    rgb(254, 254, 254),
+    rgb(230, 245, 253)
+  );
+}
+
+.blue-violet-bgc {
+  background: linear-gradient(
+    rgb(230, 245, 253),
+    rgb(254, 254, 254),
+    rgb(254, 254, 254),
+    rgb(251, 239, 255)
+  );
+}

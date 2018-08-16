@@ -24,8 +24,36 @@ body {
   height: 100%;
 }
 
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.align {
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.justify {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .header {
+  position: fixed;
+  top: 0px;
+  width: 100vw;
   background-color: #fff;
+  z-index: 10000;
 }
 
 .header-col {
@@ -38,5 +66,96 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.record-container {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 64px;
+}
+
+.record-box {
+  padding: 50px 20px 50px 20px;
+  width: 100vw;
+  height: calc(100vh - 64px);
+}
+
+.record-date-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.record-date-date {
+  width: 100%;
+}
+
+.record-date-time {
+  width: 100%;
+}
+
+.record-radio-box {
+  margin-top: 40px;
+}
+
+.record-radio-element {
+  padding: 10px;
+}
+
+.record-radio-element-button {
+  width: 40vw;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.slider-container {
+  margin: 20px;
+}
+
+.slider-1000 {
+  padding: 10px;
+}
+
+.slider-1 {
+  padding: 10px;
+}
+
+.slider-sum {
+  margin: 30px;
+}
+
+.slider-self {
+  height: 50vh;
+}
+
+.result-row {
+  margin: 15px;
+}
+
+.result-button {
+  margin-top: 35px;
+  width: 150px;
+}
+
+.ant-slider-track {
+  width: 12px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#91d5ff), color-stop(#ffdddd), to(white));
+  background: linear-gradient(#91d5ff, #ffdddd, white);
+}
+
+.green-yellow-bgc {
+  background: -webkit-gradient(linear, left top, left bottom, from(#e6ffea), color-stop(#fefefe), color-stop(#fefefe), to(#ffffe4));
+  background: linear-gradient(#e6ffea, #fefefe, #fefefe, #ffffe4);
+}
+
+.yellow-blue-bgc {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffe4), color-stop(#fefefe), color-stop(#fefefe), to(#e6f5fd));
+  background: linear-gradient(#ffffe4, #fefefe, #fefefe, #e6f5fd);
+}
+
+.blue-violet-bgc {
+  background: -webkit-gradient(linear, left top, left bottom, from(#e6f5fd), color-stop(#fefefe), color-stop(#fefefe), to(#fbefff));
+  background: linear-gradient(#e6f5fd, #fefefe, #fefefe, #fbefff);
 }
 /*# sourceMappingURL=index.css.map */
