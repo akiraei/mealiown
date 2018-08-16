@@ -158,4 +158,20 @@ body {
   background: -webkit-gradient(linear, left top, left bottom, from(#e6f5fd), color-stop(#fefefe), color-stop(#fefefe), to(#fbefff));
   background: linear-gradient(#e6f5fd, #fefefe, #fefefe, #fbefff);
 }
+
+.dashboard-container {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 64px;
+  height: calc(100vh - 64px);
+}
+
+.dashboard-box {
+  padding: 30px 20px 0px 20px;
+}
+
+.dashboard-small {
+  padding: 10px 20px 10px 20px;
+}
 /*# sourceMappingURL=index.css.map */

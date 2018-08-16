@@ -177,8 +177,8 @@ class RecordPC extends Component {
                       this.props.balance +
                       this.props.tasty >
                     1000
-                      ? "Sum: Pt. Over 1000!"
-                      : "Sum: Pt. " +
+                      ? "Pt: Over 1000!"
+                      : "Pt: " +
                         (
                           this.props.calories +
                           this.props.balance +

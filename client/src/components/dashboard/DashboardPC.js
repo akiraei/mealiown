@@ -1,65 +1,103 @@
 import React, { Component } from "react";
-import { Progress } from "antd";
+import { Progress, Row, Col } from "antd";
 
 class DashboardPC extends Component {
   render() {
+    const width = 100;
+
     return (
       <React.Fragment>
-        <Progress type="dashboard" percent={this.props.count / 10} />
-        <div>{this.props.count}</div>
-
-        <div>
-          <div>
-            <div>
-              <Progress
-                strokeLinecap="square"
-                type="dashboard"
-                percent={this.props.calAvg / 10}
-                width={50}
-                format={percent => `${percent * 10} point`}
-              />
-            </div>
-            <div>Calories</div>
+        <div className={"dashboard-container"}>
+          <div className={"dashboard-box"}>
+            <Row type="flex" justify="center" align="center">
+              <Col>
+                <Progress
+                  type="dashboard"
+                  percent={this.props.count / 10}
+                  width={180}
+                />
+                <Row type="flex" justify="center" align="center">
+                  <Col>
+                    <div>
+                      {"Count: "}
+                      {this.props.count}
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
           </div>
 
-          <div>
-            <div>
-              <Progress
-                strokeLinecap="square"
-                type="dashboard"
-                percent={this.props.balAvg / 10}
-                width={50}
-                format={percent => `${percent * 10} point`}
-              />
-            </div>
-            <div>Balance</div>
-          </div>
-        </div>
+          <div className={"dashboard-box"}>
+            <Row type="flex" justify="center" align="center">
+              <Col className={"dashboard-small"}>
+                <div>
+                  <Progress
+                    strokeLinecap="square"
+                    type="dashboard"
+                    percent={this.props.calAvg / 10}
+                    width={width}
+                    format={percent => `${percent * 10} point`}
+                  />
+                </div>
+                <Row type="flex" justify="center" align="center">
+                  <Col>
+                    <div>Avg.Calories</div>
+                  </Col>
+                </Row>
+              </Col>
+              <Col className={"dashboard-small"}>
+                <div>
+                  <Progress
+                    strokeLinecap="square"
+                    type="dashboard"
+                    percent={this.props.balAvg / 10}
+                    width={width}
+                    format={percent => `${percent * 10} point`}
+                  />
+                </div>
+                <Row type="flex" justify="center" align="center">
+                  <Col>
+                    <div>Avg.Balance</div>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
 
-        <div>
-          <div>
-            <div>
-              <Progress
-                strokeLinecap="square"
-                type="dashboard"
-                percent={this.props.tastyAvg / 10}
-                width={50}
-                format={percent => `${percent * 10} point`}
-              />
-            </div>
-            <div>Tasty</div>
-          </div>
-          <div>
-            <div>
-              <Progress
-                strokeLinecap="square"
-                type="dashboard"
-                percent={this.props.sumAvg / 10}
-                width={50}
-                format={percent => `${percent * 10} point`}
-              />
-            </div>
-            <div>Sum</div>
+            <Row type="flex" justify="center" align="center">
+              <Col className={"dashboard-small"}>
+                <div>
+                  <Progress
+                    strokeLinecap="square"
+                    type="dashboard"
+                    percent={this.props.tastyAvg / 10}
+                    width={width}
+                    format={percent => `${percent * 10} point`}
+                  />
+                </div>
+                <Row type="flex" justify="center" align="center">
+                  <Col>
+                    <div>Avg.Tasty</div>
+                  </Col>
+                </Row>
+              </Col>
+              <Col className={"dashboard-small"}>
+                <div>
+                  <Progress
+                    strokeLinecap="square"
+                    type="dashboard"
+                    percent={this.props.sumAvg / 10}
+                    width={width}
+                    format={percent => `${percent * 10} point`}
+                  />
+                </div>
+                <Row type="flex" justify="center" align="center">
+                  <Col>
+                    <div>Avg.Pt</div>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
           </div>
         </div>
       </React.Fragment>
