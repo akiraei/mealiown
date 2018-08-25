@@ -78,6 +78,42 @@
   }
 }
 
+.modal {
+  &-container {
+    width: 100vw;
+    height: calc(100vh - 128px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 64px;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  &-card {
+    width: 50vw;
+    height: 40vw;
+    padding: 10px;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+  &-title {
+    text-align: center;
+    font-size: 2rem;
+    margin: 0px 10px 10px 10px;
+  }
+  &-row {
+    width: 100%;
+  }
+  &-button {
+    font-size: 0.8rem;
+  }
+}
+
 .slider {
   &-container {
     margin: 20px;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Radio, DatePicker, TimePicker, Button, Input, Row, Col } from "antd";
 import SliderPC from "./SliderPC";
+import ModalCC from "./ModalCC";
 
 var moment = require("moment");
 
@@ -228,6 +229,8 @@ class RecordPC extends Component {
             </div>
           </div>
         </div>
+
+        {this.props.modal && <ModalCC {...this.props} />}
       </React.Fragment>
     );
   }

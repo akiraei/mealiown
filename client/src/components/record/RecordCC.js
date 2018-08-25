@@ -22,7 +22,8 @@ class RecordCC extends Component {
     date: moment().format("YYYY/MM/DD"),
     time: moment().format("HH:mm"),
     count: 1,
-    memo: ""
+    memo: "",
+    modal: false
   };
 
   pointFunc = v => {
@@ -60,7 +61,7 @@ class RecordCC extends Component {
       : this.setState({ [cate]: this.pointFunc(e) });
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const value = {
       name: this.props.ProfileCTX.state.username,
       category: this.state.category,
@@ -69,15 +70,19 @@ class RecordCC extends Component {
       calories: this.state.calories,
       balance: this.state.balance,
       tasty: this.state.tasty,
-      memo: this.state.memo
+      memo: this.state.memo,
+      modal: this.state.modal
     };
 
-    console.log("submit value: ", value);
-    this.props.saveRecordMutation({
+    const res = await this.props.saveRecordMutation({
       variables: {
         ...value
       }
     });
+
+    console.log("res: ", res);
+
+    res.data && this.setState({ modal: true });
   };
 
   render() {

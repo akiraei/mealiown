@@ -18,8 +18,8 @@ class StepPC extends Component {
             <div
               className={classNames(
                 { "step-string": true },
-                { "step-white": this.props.step === 0 },
-                { "step-blue": this.props.step > 0 }
+                { "step-white": this.props.step < 1 },
+                { "step-blue": this.props.step >= 1 }
               )}
             />
           </div>
@@ -29,7 +29,7 @@ class StepPC extends Component {
               className={classNames(
                 { "step-dot": true },
                 { "step-white": this.props.step < 2 },
-                { "step-blue": this.props.step > 1 }
+                { "step-blue": this.props.step >= 2 }
               )}
             >
               <div className={"step-title"}>How</div>
@@ -40,14 +40,20 @@ class StepPC extends Component {
             <div
               className={classNames(
                 { "step-string": true },
-                { "step-white": this.props.step < 2 },
-                { "step-blue": this.props.step === 2 }
+                { "step-white": this.props.step < 3 },
+                { "step-blue": this.props.step >= 3 }
               )}
             />
           </div>
 
           <div className={"step-box step-icon"}>
-            <div className={"step-dot step-white"}>
+            <div
+              className={classNames(
+                { "step-dot": true },
+                { "step-white": this.props.step < 4 },
+                { "step-blue": this.props.step >= 4 }
+              )}
+            >
               <div className={"step-title"}>Confirm</div>
             </div>
           </div>

@@ -79,6 +79,7 @@ body {
   width: 100vw;
   padding: 10px 30px 5px 30px;
   height: 64px;
+  background-color: white;
 }
 
 .header {
@@ -211,6 +212,58 @@ body {
 
 .step-title {
   font-size: 0.5rem;
+}
+
+.modal-container {
+  width: 100vw;
+  height: calc(100vh - 128px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  top: 64px;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-card {
+  width: 50vw;
+  height: 40vw;
+  padding: 10px;
+  background-color: white;
+  border-radius: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.modal-title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 0px 10px 10px 10px;
+}
+
+.modal-row {
+  width: 100%;
+}
+
+.modal-button {
+  font-size: 0.8rem;
 }
 
 .slider-container {
