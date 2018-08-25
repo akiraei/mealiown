@@ -48,7 +48,7 @@ class SignupCC extends Component {
         this.setState({ logined: true });
         this.props.ProfileCTX.func.setUsername(this.state.name);
       } else {
-        this.setState({ occupied: true });
+        this.setState({ occupied: true, pw: "", repw: "" });
       }
     }
   };
