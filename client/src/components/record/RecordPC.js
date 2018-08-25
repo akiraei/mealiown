@@ -210,7 +210,7 @@ class RecordPC extends Component {
               </div>
               <div className={"result-row"}>
                 Memo
-                <Input.TextArea autosize={{ minRows: 8, maxRows: 8 }} />
+                <Input.TextArea autosize={{ minRows: 5, maxRows: 5 }} />
               </div>
               <div className={"result-row"}>
                 <Row type="flex" justify="center" align="top">

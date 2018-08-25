@@ -1,6 +1,6 @@
 .record {
   &-box {
-    padding: 50px 20px 50px 20px;
+    padding: 40px 20px 120px 20px;
     width: 100vw;
     height: calc(100vh - 64px);
   }
@@ -18,7 +18,7 @@
   }
   &-radio {
     &-box {
-      margin-top: 40px;
+      margin-top: 25px;
     }
     &-element {
       padding: 10px;
@@ -44,13 +44,13 @@
     margin: 30px;
   }
   &-self {
-    height: 50vh;
+    height: 35vh;
   }
 }
 
 .result {
   &-row {
-    margin: 15px;
+    margin: 8px;
   }
   &-button {
     margin-top: 35px;
