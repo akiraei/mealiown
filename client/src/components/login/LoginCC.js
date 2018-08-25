@@ -14,11 +14,11 @@ class LoginCC extends Component {
   };
 
   handleChangeName = e => {
-    this.setState({ name: e.target.value });
+    this.setState({ name: e.target.value, error: false });
   };
 
   handleChangePw = e => {
-    this.setState({ pw: e.target.value });
+    this.setState({ pw: e.target.value, error: false });
   };
 
   handleSubmit = async () => {

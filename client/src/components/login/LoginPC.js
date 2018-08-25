@@ -1,23 +1,40 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Alert } from "antd";
+import { Alert, Input, Row, Col, Button } from "antd";
 class LoginPC extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className={"page-container"}>
-          <input onChange={this.props.onChangeName} placeholder={"id"} />
-          <input onChange={this.props.onChangePw} placeholder={"pw"} />
-          {/* <Link to={"/record"} onClick={this.props.onSubmit}> */}
-          <button onClick={this.props.onSubmit}>submit</button>
-          {/* </Link> */}
+        <div className={"page-container page-filler"}>
+          <div className={"login-box"}>
+            <Row type="flex" justify="center" align="center">
+              <Col>
+                <Input onChange={this.props.onChangeName} placeholder={"id"} />
+              </Col>
+            </Row>
+            <Row type="flex" justify="center" align="center">
+              <Col>
+                <Input onChange={this.props.onChangePw} placeholder={"pw"} />
+              </Col>
+            </Row>
+            <Row type="flex" justify="center" align="center">
+              <Col>
+                <Button onClick={this.props.onSubmit}>submit</Button>
+              </Col>
+            </Row>
+          </div>
+
           {this.props.error && (
-            <Alert
-              message="Error"
-              description="Wrong ID or Password"
-              type="error"
-              showIcon
-            />
+            <Row type="flex" justify="center" align="center">
+              <Col>
+                <Alert
+                  message="Error"
+                  description="Wrong ID or Password"
+                  type="error"
+                  showIcon
+                />
+              </Col>
+            </Row>
           )}
         </div>
       </React.Fragment>

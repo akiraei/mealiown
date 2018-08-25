@@ -55,6 +55,10 @@ body {
   margin-top: 64px;
 }
 
+.page-filler {
+  height: calc(100vh - 64px);
+}
+
 .loading-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -173,15 +177,26 @@ body {
   background: linear-gradient(#e6f5fd, #fefefe, #fefefe, #fbefff);
 }
 
-.dashboard-container {
-  height: calc(100vh - 64px);
-}
-
 .dashboard-box {
   padding: 30px 20px 0px 20px;
 }
 
 .dashboard-small {
   padding: 10px 20px 10px 20px;
+}
+
+.login-box {
+  padding: 30px 20px 0px 20px;
+  margin: 0px 0px 60px 0px;
+  height: 40vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 /*# sourceMappingURL=index.css.map */

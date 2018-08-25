@@ -12,7 +12,7 @@ class DashboardPC extends Component {
             <Spin size="large" tip="Loading..." />
           </div>
         ) : (
-          <div className={"page-container dashboard-container"}>
+          <div className={"page-container page-filler"}>
             <div className={"dashboard-box"}>
               <Row type="flex" justify="center" align="center">
                 <Col>

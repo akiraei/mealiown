@@ -47,6 +47,9 @@ body {
     align-items: center;
     margin-top: 64px;
   }
+  &-filler {
+    height: calc(100vh - 64px);
+  }
 }
 
 .loading {
@@ -69,6 +72,7 @@ body {
 @import "stylesheet/header";
 @import "stylesheet/record";
 @import "stylesheet/dashboard";
+@import "stylesheet/login";
 
 // @import 'stylesheet/layout';
 
