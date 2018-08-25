@@ -30,6 +30,54 @@
   }
 }
 
+.step {
+  width: 100%;
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  &-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0px 7px 0px 7px;
+  }
+  &-icon {
+    width: 10%;
+  }
+  &-line {
+    width: 35%;
+  }
+  &-string {
+    width: 100%;
+    height: 5px;
+    border-radius: 10px;
+    z-index: 1000;
+  }
+  &-white {
+    background-color: white;
+  }
+  &-blue {
+    background-color: #1890ff;
+    color: white;
+  }
+  &-dot {
+    border-radius: 5px;
+    width: 60px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  }
+  &-title {
+    font-size: 0.5rem;
+  }
+}
+
 .slider {
   &-container {
     margin: 20px;

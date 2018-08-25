@@ -1,28 +1,22 @@
 import React, { Component } from "react";
 import StepPC from "./StepPC";
-import { graphql } from "react-apollo";
-import { saveRecordMutation } from "../../queries/queries";
-
-var moment = require("moment");
 
 class StepCC extends Component {
-  static defaultProps = {
-    ProfileCTX: {
-      state: {
-        username: "fds"
-      }
-    }
+  state = {
+    step: 0
   };
 
-  state = {
-    calories: 1,
-    balance: 1,
-    tasty: 1,
-    category: "",
-    date: moment().format("YYYY/MM/DD"),
-    time: moment().format("HH:mm"),
-    count: 1,
-    memo: ""
+  componentDidMount = () => {
+    const scrolling = () => {
+      console.log(this.state.step);
+      window.scrollY > 590
+        ? window.scrollY > 1200
+          ? this.setState({ step: 2 })
+          : this.setState({ step: 1 })
+        : this.setState({ step: 0 });
+    };
+
+    window.addEventListener("scroll", scrolling);
   };
 
   render() {
