@@ -9,7 +9,8 @@ class LoginCC extends Component {
   state = {
     name: "",
     pw: "",
-    success: false
+    success: false,
+    error: false
   };
 
   handleChangeName = e => {
@@ -31,6 +32,8 @@ class LoginCC extends Component {
       localStorage.setItem("token", res.data.token.token);
       this.setState({ success: true });
       this.props.ProfileCTX.func.setUsername(this.state.name);
+    } else {
+      this.setState({ error: true });
     }
   };
 
@@ -40,6 +43,7 @@ class LoginCC extends Component {
     ) : (
       <LoginPC
         {...this.props}
+        {...this.state}
         onChangeName={this.handleChangeName}
         onChangePw={this.handleChangePw}
         onSubmit={this.handleSubmit}

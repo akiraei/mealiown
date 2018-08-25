@@ -8,6 +8,8 @@ class SignupCC extends Component {
   state = {
     name: "",
     pw: "",
+    repw: "",
+    match: false,
     logined: false
   };
 
@@ -16,20 +18,34 @@ class SignupCC extends Component {
   };
 
   handleChangePw = e => {
-    this.setState({ pw: e.target.value });
+    if (this.state.repw === e.target.value) {
+      this.setState({ pw: e.target.value, match: true });
+    } else {
+      this.setState({ pw: e.target.value, match: false });
+    }
+  };
+
+  handleChangeRePw = e => {
+    if (this.state.pw === e.target.value) {
+      this.setState({ repw: e.target.value, match: true });
+    } else {
+      this.setState({ repw: e.target.value, match: false });
+    }
   };
 
   handleSubmit = async () => {
-    const res = await this.props.saveUserMutation({
-      variables: {
-        name: this.state.name,
-        pw: this.state.pw
+    if (this.state.match) {
+      const res = await this.props.saveUserMutation({
+        variables: {
+          name: this.state.name,
+          pw: this.state.pw
+        }
+      });
+      if (res.data.addUser) {
+        localStorage.setItem("token", res.data.addUser.token);
+        this.setState({ logined: true });
+        this.props.ProfileCTX.func.setUsername(this.state.name);
       }
-    });
-    if (res.data.addUser) {
-      localStorage.setItem("token", res.data.addUser.token);
-      this.setState({ logined: true });
-      this.props.ProfileCTX.func.setUsername(this.state.name);
     }
   };
 
@@ -39,8 +55,10 @@ class SignupCC extends Component {
     ) : (
       <SignupPC
         {...this.props}
+        {...this.state}
         onChangeName={this.handleChangeName}
         onChangePw={this.handleChangePw}
+        onChangeRePw={this.handleChangeRePw}
         onSubmit={this.handleSubmit}
       />
     );

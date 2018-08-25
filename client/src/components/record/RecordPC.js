@@ -12,7 +12,7 @@ class RecordPC extends Component {
 
     return (
       <React.Fragment>
-        <div className={"record-container flex column"}>
+        <div className={"record-container page-container flex column"}>
           <div className={"record-box green-yellow-bgc flex column"}>
             <Row
               type="flex"

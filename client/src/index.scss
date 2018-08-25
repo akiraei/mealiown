@@ -42,6 +42,13 @@ body {
   justify-content: space-between;
 }
 
+.page {
+  &-container {
+    align-items: center;
+    margin-top: 64px;
+  }
+}
+
 // component styling
 // @import 'stylesheet/members';
 // @import 'stylesheet/label';

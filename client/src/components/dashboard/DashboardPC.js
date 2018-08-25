@@ -7,7 +7,7 @@ class DashboardPC extends Component {
 
     return (
       <React.Fragment>
-        <div className={"dashboard-container"}>
+        <div className={"page-container dashboard-container"}>
           <div className={"dashboard-box"}>
             <Row type="flex" justify="center" align="center">
               <Col>

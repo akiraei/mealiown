@@ -48,6 +48,13 @@ body {
           justify-content: space-between;
 }
 
+.page-container {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 64px;
+}
+
 .header {
   position: fixed;
   top: 0px;
@@ -66,13 +73,6 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.record-container {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-top: 64px;
 }
 
 .record-box {
@@ -160,10 +160,6 @@ body {
 }
 
 .dashboard-container {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-top: 64px;
   height: calc(100vh - 64px);
 }
 
