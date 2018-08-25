@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Alert } from "antd";
 
 class SignupPC extends Component {
   render() {
@@ -17,6 +17,14 @@ class SignupPC extends Component {
           >
             submit
           </Button>
+          {this.props.occupied && (
+            <Alert
+              message="Error"
+              description="ID occupied"
+              type="error"
+              showIcon
+            />
+          )}
           {/* </Link> */}
         </div>
       </React.Fragment>

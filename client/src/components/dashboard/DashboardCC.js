@@ -9,7 +9,8 @@ class DashboardCC extends Component {
     count: 0,
     calAvg: 0,
     balAvg: 0,
-    tastyAvg: 0
+    tastyAvg: 0,
+    loading: true
   };
 
   componentDidMount = async () => {
@@ -31,7 +32,7 @@ class DashboardCC extends Component {
       count && parseInt(arr.reduce((acu, cv) => acu + cv.tasty, 0) / count);
     const sumAvg =
       count && parseInt(arr.reduce((acu, cv) => acu + cv.sum, 0) / count);
-    this.setState({ count, calAvg, balAvg, tastyAvg, sumAvg });
+    this.setState({ count, calAvg, balAvg, tastyAvg, sumAvg, loading: false });
   };
 
   render() {

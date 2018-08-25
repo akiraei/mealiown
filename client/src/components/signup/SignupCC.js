@@ -3,6 +3,7 @@ import SignupPC from "./SignupPC";
 import { graphql } from "react-apollo";
 import { saveUserMutation } from "../../queries/queries";
 import { Redirect } from "react-router-dom";
+import withProfile from "../../hocs/withProfile";
 
 class SignupCC extends Component {
   state = {
@@ -10,7 +11,8 @@ class SignupCC extends Component {
     pw: "",
     repw: "",
     match: false,
-    logined: false
+    logined: false,
+    occupied: false
   };
 
   handleChangeName = e => {
@@ -45,6 +47,8 @@ class SignupCC extends Component {
         localStorage.setItem("token", res.data.addUser.token);
         this.setState({ logined: true });
         this.props.ProfileCTX.func.setUsername(this.state.name);
+      } else {
+        this.setState({ occupied: true });
       }
     }
   };
@@ -66,5 +70,5 @@ class SignupCC extends Component {
 }
 
 export default graphql(saveUserMutation, { name: "saveUserMutation" })(
-  SignupCC
+  withProfile(SignupCC)
 );
