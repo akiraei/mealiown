@@ -19,7 +19,7 @@ class DashboardCC extends Component {
         name: this.props.ProfileCTX.state.username
       }
     });
-    console.log("dash res", res.data);
+    // console.log("dash res", res.data);
     const arr = res.data.getRecord;
     const count = arr.length
       ? res.data.getRecord.sort((a, b) => b.count - a.count)[0].count

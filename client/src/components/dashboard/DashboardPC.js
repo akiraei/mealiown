@@ -3,7 +3,8 @@ import { Progress, Row, Col, Spin } from "antd";
 
 class DashboardPC extends Component {
   render() {
-    const width = 100;
+    const width = document.body.offsetHeight / 6.3;
+    const bigone = document.body.offsetHeight / 4.2;
 
     return (
       <React.Fragment>
@@ -19,7 +20,7 @@ class DashboardPC extends Component {
                   <Progress
                     type="dashboard"
                     percent={this.props.count / 10}
-                    width={180}
+                    width={bigone}
                   />
                   <Row type="flex" justify="center" align="center">
                     <Col>

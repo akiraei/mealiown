@@ -10,7 +10,7 @@ class StepPC extends Component {
         <div className={"step-container"}>
           <div className={"step-box step-icon"}>
             <div className={"step-dot step-blue"}>
-              <div className={"step-title"}>When</div>
+              <div className={"step-title"}>1.When</div>
             </div>
           </div>
 
@@ -32,7 +32,7 @@ class StepPC extends Component {
                 { "step-blue": this.props.step >= 2 }
               )}
             >
-              <div className={"step-title"}>How</div>
+              <div className={"step-title"}>2.How</div>
             </div>
           </div>
 
@@ -54,7 +54,7 @@ class StepPC extends Component {
                 { "step-blue": this.props.step >= 4 }
               )}
             >
-              <div className={"step-title"}>Confirm</div>
+              <div className={"step-title"}>3.Confirm</div>
             </div>
           </div>
         </div>

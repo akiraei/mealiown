@@ -80,7 +80,7 @@ class RecordCC extends Component {
       }
     });
 
-    console.log("res: ", res);
+    // console.log("res: ", res);
 
     res.data && this.setState({ modal: true });
   };

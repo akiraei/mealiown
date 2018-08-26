@@ -103,7 +103,7 @@ body {
 }
 
 .record-box {
-  padding: 40px 20px 120px 20px;
+  padding: 30px 20px 120px 20px;
   width: 100vw;
   height: calc(100vh - 64px);
 }
@@ -115,18 +115,20 @@ body {
 
 .record-date-date {
   width: 100%;
+  margin-top: 20px;
 }
 
 .record-date-time {
   width: 100%;
+  margin-top: 40px;
 }
 
 .record-radio-box {
-  margin-top: 25px;
+  margin-top: 90px;
 }
 
 .record-radio-element {
-  padding: 10px;
+  padding: 5px;
 }
 
 .record-radio-element-button {
@@ -179,7 +181,7 @@ body {
 }
 
 .step-string {
-  width: 100%;
+  width: 80%;
   height: 5px;
   border-radius: 10px;
   z-index: 1000;
@@ -287,11 +289,11 @@ body {
 }
 
 .result-row {
-  margin: 8px;
+  margin: 0px 8px 0.3rem 8px;
 }
 
 .result-button {
-  margin-top: 35px;
+  margin-top: 1.2rem;
   width: 150px;
 }
 

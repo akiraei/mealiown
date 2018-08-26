@@ -7,33 +7,35 @@ class StepCC extends Component {
   };
 
   componentDidMount = () => {
+    const range = document.body.scrollHeight - document.body.offsetHeight;
     const scrolling = () => {
-      const x = window.scrollY;
-
-      console.log("Y: ", x);
+      // console.log(range, window.scrollY);
 
       switch (true) {
-        case x < 300:
-          this.setState({ step: 0 });
+        case window.scrollY < range / 4:
+          this.handleChangeStep(0);
           break;
-        case 300 <= x && x < 606:
-          this.setState({ step: 1 });
+        case range / 4 <= window.scrollY && window.scrollY < range / 2:
+          this.handleChangeStep(1);
           break;
-        case 606 <= x && x < 900:
-          this.setState({ step: 2 });
+        case range / 2 <= window.scrollY && window.scrollY < range * 0.75:
+          this.handleChangeStep(2);
           break;
-        case 900 <= x && x < 1200:
-          this.setState({ step: 3 });
+        case range * 0.75 <= window.scrollY && window.scrollY < range - 10:
+          this.handleChangeStep(3);
           break;
-        case 1200 <= x:
-          this.setState({ step: 4 });
+        case range - 10 <= window.scrollY:
+          this.handleChangeStep(4);
           break;
         default:
           break;
       }
     };
-
     window.addEventListener("scroll", scrolling);
+  };
+
+  handleChangeStep = x => {
+    this.setState({ step: x });
   };
 
   render() {
