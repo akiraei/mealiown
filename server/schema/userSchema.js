@@ -5,6 +5,8 @@ const Token = require("../models/token");
 
 const _ = require("lodash");
 var jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const env = process.env;
 
 const {
   GraphQLObjectType,
@@ -30,7 +32,6 @@ const UserType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     pw: { type: GraphQLString }
-    // token: { type: GraphQLString }
   })
 });
 
@@ -88,10 +89,11 @@ const Mutation = new GraphQLObjectType({
       async resolve(parent, args) {
         const value = await User.findOne({ name: args.name });
         if (!value) {
-          const token = jwt.sign({ name: args.name }, "secret");
+          const password = bcrypt.hashSync(args.pw, 10);
+          const token = jwt.sign({ name: args.name }, env.TOKEN);
           let user = new User({
             name: args.name,
-            pw: args.pw
+            pw: password
           });
           user.save();
           return { name: args.name, token };
@@ -105,10 +107,10 @@ const Mutation = new GraphQLObjectType({
         pw: { type: GraphQLString }
       },
       async resolve(parent, args) {
-        const value = await User.findOne({ name: args.name, pw: args.pw });
-        if (value) {
+        const value = await User.findOne({ name: args.name });
+        if (bcrypt.compareSync(args.pw, value.pw)) {
           let token = new Token({
-            token: jwt.sign({ name: args.name }, "secret")
+            token: jwt.sign({ name: args.name }, env.TOKEN)
           });
           return token;
         }
@@ -120,7 +122,7 @@ const Mutation = new GraphQLObjectType({
         token: { type: GraphQLString }
       },
       async resolve(parent, args) {
-        const value = jwt.verify(args.token, "secret");
+        const value = jwt.verify(args.token, env.TOKEN);
         const arr = await Record.find({ name: value.name });
         return arr;
       }
@@ -131,7 +133,7 @@ const Mutation = new GraphQLObjectType({
         token: { type: GraphQLString }
       },
       resolve(parent, args) {
-        let value = jwt.verify(args.token, "secret");
+        let value = jwt.verify(args.token, env.TOKEN);
         return { name: value.name };
       }
     },

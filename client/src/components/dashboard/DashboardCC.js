@@ -19,7 +19,6 @@ class DashboardCC extends Component {
         token: localStorage.getItem("token")
       }
     });
-    console.log("dash res", res.data);
     const arr = res.data.records;
     const count = arr.length
       ? res.data.records.sort((a, b) => b.count - a.count)[0].count

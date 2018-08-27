@@ -9,8 +9,6 @@ class StepCC extends Component {
   componentDidMount = () => {
     const range = document.body.scrollHeight - document.body.offsetHeight;
     const scrolling = () => {
-      // console.log(range, window.scrollY);
-
       switch (true) {
         case window.scrollY < range / 4:
           this.handleChangeStep(0);

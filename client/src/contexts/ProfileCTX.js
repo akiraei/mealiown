@@ -28,7 +28,6 @@ class ProfileProvider extends Component {
   };
 
   setUsername = name => {
-    // console.log("set username");
     this.setState({ username: name });
   };
 

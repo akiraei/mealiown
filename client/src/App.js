@@ -18,7 +18,7 @@ import DashboardPage from "./pages/DashboardPage";
 
 // apollo client setup
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  uri: "https://even-friction.glitch.me/graphql"
 });
 
 class App extends Component {

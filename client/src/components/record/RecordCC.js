@@ -71,7 +71,6 @@ class RecordCC extends Component {
         ...value
       }
     });
-    console.log("res: ", res);
     res.data && this.setState({ modal: true });
   };
 
