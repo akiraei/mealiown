@@ -1,0 +1,179 @@
+.record {
+  &-box {
+    padding: 30px 20px 120px 20px;
+    width: 100vw;
+    height: calc(100vh - 64px);
+  }
+  &-date {
+    &-row {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    &-date {
+      width: 100%;
+      margin-top: 20px;
+    }
+    &-time {
+      width: 100%;
+      margin-top: 40px;
+    }
+  }
+  &-radio {
+    &-box {
+      margin-top: 90px;
+    }
+    &-element {
+      padding: 5px;
+      &-button {
+        width: 40vw;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.step {
+  width: 100%;
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  &-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0px 7px 0px 7px;
+  }
+  &-icon {
+    width: 10%;
+  }
+  &-line {
+    width: 35%;
+  }
+  &-string {
+    width: 80%;
+    height: 5px;
+    border-radius: 10px;
+    z-index: 1000;
+  }
+  &-white {
+    background-color: white;
+  }
+  &-blue {
+    background-color: #1890ff;
+    color: white;
+  }
+  &-dot {
+    border-radius: 5px;
+    width: 60px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  }
+  &-title {
+    font-size: 0.5rem;
+  }
+}
+
+.modal {
+  &-container {
+    width: 100vw;
+    height: calc(100vh - 128px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 64px;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  &-card {
+    width: 50vw;
+    height: 40vw;
+    padding: 10px;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+  &-title {
+    text-align: center;
+    font-size: 2rem;
+    margin: 0px 10px 10px 10px;
+  }
+  &-row {
+    width: 100%;
+  }
+  &-button {
+    font-size: 0.8rem;
+  }
+}
+
+.slider {
+  &-container {
+    margin: 20px;
+  }
+  &-1000 {
+    padding: 10px;
+  }
+  &-1 {
+    padding: 10px;
+  }
+  &-sum {
+    margin: 30px;
+  }
+  &-self {
+    height: 35vh;
+  }
+}
+
+.result {
+  &-row {
+    margin: 0px 8px 0.3rem 8px;
+  }
+  &-button {
+    margin-top: 1.2rem;
+    width: 150px;
+  }
+}
+
+.ant-slider {
+  &-track {
+    width: 12px;
+    background: linear-gradient(rgb(145, 213, 255), rgb(255, 221, 221), white);
+  }
+}
+
+.green-yellow-bgc {
+  background: linear-gradient(
+    rgb(230, 255, 234),
+    rgb(254, 254, 254),
+    rgb(254, 254, 254),
+    rgb(255, 255, 228)
+  );
+}
+
+.yellow-blue-bgc {
+  background: linear-gradient(
+    rgb(255, 255, 228),
+    rgb(254, 254, 254),
+    rgb(254, 254, 254),
+    rgb(230, 245, 253)
+  );
+}
+
+.blue-violet-bgc {
+  background: linear-gradient(
+    rgb(230, 245, 253),
+    rgb(254, 254, 254),
+    rgb(254, 254, 254),
+    rgb(251, 239, 255)
+  );
+}

@@ -1,0 +1,10 @@
+.signup {
+  &-box {
+    padding: 30px 20px 0px 20px;
+    margin: 0px 0px 30px 0px;
+    height: 50vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+}
