@@ -13,7 +13,9 @@ app.use(cors());
 
 // connect to mlab database
 // make sure to replace my db string & creds with your own
-mongoose.connect("mongodb://akira:test1234@ds113402.mlab.com:13402/mealiown");
+mongoose.connect(
+  `mongodb://akira:${env.PASS}@ds113402.mlab.com:13402/mealiown`
+);
 mongoose.connection.once("open", () => {
   console.log("conneted to database");
 });

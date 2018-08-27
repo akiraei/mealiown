@@ -1,12 +1,42 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
+import { Alert, Input, Row, Col, Button } from "antd";
 class LoginPC extends Component {
   render() {
     return (
       <React.Fragment>
-        <input onChange={this.props.onChangeName} placeholder={"id"} />
-        <input onChange={this.props.onChangePw} placeholder={"pw"} />
-        <button onClick={this.props.onSubmit}>submit</button>
+        <div className={"page-container page-filler"}>
+          <div className={"login-box"}>
+            <Row type="flex" justify="center" align="center">
+              <Col>
+                <Input onChange={this.props.onChangeName} placeholder={"id"} />
+              </Col>
+            </Row>
+            <Row type="flex" justify="center" align="center">
+              <Col>
+                <Input onChange={this.props.onChangePw} placeholder={"pw"} />
+              </Col>
+            </Row>
+            <Row type="flex" justify="center" align="center">
+              <Col>
+                <Button onClick={this.props.onSubmit}>submit</Button>
+              </Col>
+            </Row>
+          </div>
+
+          {this.props.error && (
+            <Row type="flex" justify="center" align="center">
+              <Col>
+                <Alert
+                  message="Error"
+                  description="Wrong ID or Password"
+                  type="error"
+                  showIcon
+                />
+              </Col>
+            </Row>
+          )}
+        </div>
       </React.Fragment>
     );
   }

@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import LoginCC from "../components/login/LoginCC";
+import DashboardCC from "../components/dashboard/DashboardCC";
+import HeaderCC from "../components/header/HeaderCC";
+
+import withToken from "../hocs/withToken";
+
 import { Layout } from "antd";
 
-import HeaderCC from "../components/header/HeaderCC";
 const { Header, Footer, Sider, Content } = Layout;
-class LoginPage extends Component {
+
+class DashboardPage extends Component {
   render() {
     return (
       <React.Fragment>
@@ -13,7 +17,7 @@ class LoginPage extends Component {
             <HeaderCC {...this.props} />
           </Header>
           <Content>
-            <LoginCC {...this.props} />
+            <DashboardCC {...this.props} />
           </Content>
         </Layout>
       </React.Fragment>
@@ -21,4 +25,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default withToken(DashboardPage);

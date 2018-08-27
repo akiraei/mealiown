@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import LoginCC from "../components/login/LoginCC";
+import SignupCC from "../components/signup/SignupCC";
+
 import { Layout } from "antd";
 
 import HeaderCC from "../components/header/HeaderCC";
 const { Header, Footer, Sider, Content } = Layout;
-class LoginPage extends Component {
+class SignupPage extends Component {
   render() {
     return (
       <React.Fragment>
@@ -13,7 +14,7 @@ class LoginPage extends Component {
             <HeaderCC {...this.props} />
           </Header>
           <Content>
-            <LoginCC {...this.props} />
+            <SignupCC {...this.props} />
           </Content>
         </Layout>
       </React.Fragment>
@@ -21,4 +22,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default SignupPage;
