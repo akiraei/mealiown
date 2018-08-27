@@ -57,6 +57,7 @@ class RecordPC extends Component {
                   this.props.onChange(e)("category");
                 }}
                 buttonstyle={"solid"}
+                value={this.props.category}
               >
                 <Row className={"record-radio-row"}>
                   <Row

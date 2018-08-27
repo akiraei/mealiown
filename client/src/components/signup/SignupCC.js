@@ -43,6 +43,7 @@ class SignupCC extends Component {
           pw: this.state.pw
         }
       });
+      console.log("ocufied: ", res.data);
       if (res.data.addUser) {
         localStorage.setItem("token", res.data.addUser.token);
         this.setState({ logined: true });

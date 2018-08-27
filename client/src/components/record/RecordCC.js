@@ -2,18 +2,11 @@ import React, { Component } from "react";
 import RecordPC from "./RecordPC";
 import { graphql } from "react-apollo";
 import { saveRecordMutation } from "../../queries/queries";
+import withProfile from "../../hocs/withProfile";
 
 var moment = require("moment");
 
 class RecordCC extends Component {
-  static defaultProps = {
-    ProfileCTX: {
-      state: {
-        username: "fds"
-      }
-    }
-  };
-
   state = {
     calories: 1,
     balance: 1,
@@ -73,16 +66,18 @@ class RecordCC extends Component {
       memo: this.state.memo,
       modal: this.state.modal
     };
-
     const res = await this.props.saveRecordMutation({
       variables: {
         ...value
       }
     });
-
-    // console.log("res: ", res);
-
+    console.log("res: ", res);
     res.data && this.setState({ modal: true });
+  };
+
+  handleModalClose = () => {
+    window.scrollTo(0, 0);
+    this.setState({ modal: false, category: "" });
   };
 
   render() {
@@ -92,11 +87,12 @@ class RecordCC extends Component {
         {...this.props}
         onChange={this.handleChange}
         onSubmit={this.handleSubmit}
+        onClose={this.handleModalClose}
       />
     );
   }
 }
 
 export default graphql(saveRecordMutation, { name: "saveRecordMutation" })(
-  RecordCC
+  withProfile(RecordCC)
 );

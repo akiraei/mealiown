@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DashboardPC from "./DashboardPC";
 import { graphql } from "react-apollo";
-import { getRecordMutation } from "../../queries/queries";
+import { getRecordsMutation } from "../../queries/queries";
 import withProfile from "../../hocs/withProfile";
 
 class DashboardCC extends Component {
@@ -14,15 +14,15 @@ class DashboardCC extends Component {
   };
 
   componentDidMount = async () => {
-    const res = await this.props.getRecordMutation({
+    const res = await this.props.getRecordsMutation({
       variables: {
-        name: this.props.ProfileCTX.state.username
+        token: localStorage.getItem("token")
       }
     });
-    // console.log("dash res", res.data);
-    const arr = res.data.getRecord;
+    console.log("dash res", res.data);
+    const arr = res.data.records;
     const count = arr.length
-      ? res.data.getRecord.sort((a, b) => b.count - a.count)[0].count
+      ? res.data.records.sort((a, b) => b.count - a.count)[0].count
       : 0;
     const calAvg =
       count && parseInt(arr.reduce((acu, cv) => acu + cv.calories, 0) / count);
@@ -40,6 +40,6 @@ class DashboardCC extends Component {
   }
 }
 
-export default graphql(getRecordMutation, { name: "getRecordMutation" })(
+export default graphql(getRecordsMutation, { name: "getRecordsMutation" })(
   withProfile(DashboardCC)
 );

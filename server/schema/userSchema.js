@@ -1,6 +1,7 @@
 const graphql = require("graphql");
 const User = require("../models/user");
 const Record = require("../models/record");
+const Token = require("../models/token");
 
 const _ = require("lodash");
 var jwt = require("jsonwebtoken");
@@ -15,13 +16,21 @@ const {
   GraphQLNonNull
 } = graphql;
 
+const TokenType = new GraphQLObjectType({
+  name: "Token",
+  fields: () => ({
+    id: { type: GraphQLID },
+    token: { type: GraphQLString }
+  })
+});
+
 const UserType = new GraphQLObjectType({
   name: "User",
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
-    pw: { type: GraphQLString },
-    token: { type: GraphQLString }
+    pw: { type: GraphQLString }
+    // token: { type: GraphQLString }
   })
 });
 
@@ -56,13 +65,6 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         return User.find({});
       }
-    },
-    recordData: {
-      type: new GraphQLList(RecordType),
-      args: { name: { type: GraphQLString } },
-      resolve(parent, args) {
-        return Record.find({ name: args.name });
-      }
     }
   }
 });
@@ -71,7 +73,14 @@ const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     addUser: {
-      type: UserType,
+      type: new GraphQLObjectType({
+        name: "combination",
+        fields: () => ({
+          name: { type: GraphQLString },
+          pw: { type: GraphQLString },
+          token: { type: GraphQLString }
+        })
+      }),
       args: {
         name: { type: GraphQLString },
         pw: { type: GraphQLString }
@@ -79,23 +88,41 @@ const Mutation = new GraphQLObjectType({
       async resolve(parent, args) {
         const value = await User.findOne({ name: args.name });
         if (!value) {
+          const token = jwt.sign({ name: args.name }, "secret");
           let user = new User({
             name: args.name,
-            pw: args.pw,
-            token: jwt.sign({ name: args.name }, "secret")
+            pw: args.pw
           });
-          return user.save();
+          user.save();
+          return { name: args.name, token };
         }
       }
     },
     token: {
-      type: UserType,
+      type: TokenType,
       args: {
         name: { type: GraphQLString },
         pw: { type: GraphQLString }
       },
-      resolve(parent, args) {
-        return User.findOne({ name: args.name, pw: args.pw });
+      async resolve(parent, args) {
+        const value = await User.findOne({ name: args.name, pw: args.pw });
+        if (value) {
+          let token = new Token({
+            token: jwt.sign({ name: args.name }, "secret")
+          });
+          return token;
+        }
+      }
+    },
+    records: {
+      type: new GraphQLList(RecordType),
+      args: {
+        token: { type: GraphQLString }
+      },
+      async resolve(parent, args) {
+        const value = jwt.verify(args.token, "secret");
+        const arr = await Record.find({ name: value.name });
+        return arr;
       }
     },
     sign: {
@@ -144,16 +171,6 @@ const Mutation = new GraphQLObjectType({
               : args.calories + args.balance + args.tasty
         });
         return payload.save();
-      }
-    },
-    getRecord: {
-      type: new GraphQLList(RecordType),
-      args: {
-        name: { type: GraphQLString }
-      },
-      async resolve(parent, args) {
-        const arr = await Record.find({ name: args.name });
-        return arr;
       }
     }
   }

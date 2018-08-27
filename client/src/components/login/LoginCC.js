@@ -28,6 +28,7 @@ class LoginCC extends Component {
         pw: this.state.pw
       }
     });
+    console.log("res: ", res.data);
     if (res.data.token) {
       localStorage.setItem("token", res.data.token.token);
       this.setState({ success: true });

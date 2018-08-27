@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col } from "antd";
+import { Row, Col, Button } from "antd";
 
 class ModalPC extends Component {
   render() {
@@ -17,14 +17,18 @@ class ModalPC extends Component {
               align="center"
             >
               <Col>
-                <Link to="/record">
-                  <p className={"modal-button"}>record</p>{" "}
-                </Link>
+                <Button size="small" onClick={this.props.onClose}>
+                  <Link to="/record">
+                    <p className={"modal-button"}>record</p>
+                  </Link>
+                </Button>
               </Col>
               <Col>
-                <Link to="/dashboard">
-                  <p className={"modal-button"}>dashboard</p>{" "}
-                </Link>
+                <Button size="small">
+                  <Link to="/dashboard">
+                    <p className={"modal-button"}>dashboard</p>{" "}
+                  </Link>
+                </Button>
               </Col>
             </Row>
           </div>
