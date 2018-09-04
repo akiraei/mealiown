@@ -319,11 +319,53 @@ body {
 }
 
 .dashboard-box {
-  padding: 30px 20px 0px 20px;
+  padding: 15px 20px 0px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.dashboard-slided {
+  margin: 0px 0px 0px 45vw;
 }
 
 .dashboard-small {
   padding: 10px 20px 10px 20px;
+}
+
+.dashboard-index {
+  position: absolute;
+  padding: 10px 12px 10px 12px;
+  z-index: 100;
+  top: 4.6875rem;
+  left: 0.625rem;
+  width: 8.75rem;
+  height: 10rem;
+  font-size: 0.8rem;
+  background-color: rgba(133, 133, 133, 0.253);
+  border-radius: 0.9375rem;
+}
+
+.dashboard-index p {
+  margin: 0px 0px 5px 0px;
+}
+
+.dashboard-index-tag {
+  font-size: 0.4rem;
+  padding: 4px;
+  line-height: 12px;
+  margin: 0px;
+}
+
+.dashboard-little {
+  margin: 0px 10px 0px 10px;
 }
 
 .login-box {
@@ -433,6 +475,7 @@ body {
   height: 64px;
   overflow: hidden;
   background-color: snow;
+  z-index: 1000;
 }
 
 .selector-open {

@@ -23,12 +23,14 @@ const cateDefault = [
 const avgsOptions = ["Calories", "Balance", "Tasty", "Total"];
 const avgsDefault = ["Calories", "Balance", "Tasty", "Total"];
 
+const filterSelectted = {};
 class DashboardCC extends Component {
   state = {
     count: 0,
     calAvg: 0,
     balAvg: 0,
     tastyAvg: 0,
+    sumAvg: 0,
     loading: true,
 
     cateList: cateDefault,
@@ -39,7 +41,9 @@ class DashboardCC extends Component {
     avgsAll: false,
     open: false,
     time: [0, 24],
-    daybefore: 99999
+    daybefore: 99999,
+
+    submitted: false
   };
 
   componentDidMount = async () => {
@@ -112,6 +116,13 @@ class DashboardCC extends Component {
     this.setState({ daybefore: e.target.value });
   };
 
+  handleSubmit = () => {
+    console.log("submit");
+    this.setState({
+      submitted: true
+    });
+  };
+
   render() {
     return (
       <DashboardPC
@@ -128,7 +139,8 @@ class DashboardCC extends Component {
         ofFilter={{
           onOpen: this.handleOpen,
           onSliderChange: this.handleSliderChange,
-          onRadioChange: this.handleRadioChange
+          onRadioChange: this.handleRadioChange,
+          onSubmit: this.handleSubmit
         }}
       />
     );

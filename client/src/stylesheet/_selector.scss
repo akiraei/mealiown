@@ -9,6 +9,7 @@
     height: 64px;
     overflow: hidden;
     background-color: snow;
+    z-index: 1000;
   }
   &-open {
     transition: 1s;
