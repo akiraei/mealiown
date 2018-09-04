@@ -14,6 +14,27 @@ class DashboardPC extends Component {
           </div>
         ) : (
           <div className={"page-container page-filler"}>
+            <div className={"dashboard-index"}>
+              <p>{this.props.daybefore}</p>
+              <p>
+                {this.props.time[0]} ~ {this.props.time[1]}
+              </p>
+              <p>
+                {this.props.cateList.reduce((total, element) => {
+                  total + element;
+                }, "")}
+              </p>
+              {/* <p>
+                {() => {
+                  let str = "";
+                  this.props.avgsList.forEach(e => {
+                    str + ", " + e;
+                  });
+                  return str;
+                }}
+              </p> */}
+            </div>
+
             <div className={"dashboard-box"}>
               <Row type="flex" justify="center" align="center">
                 <Col>
