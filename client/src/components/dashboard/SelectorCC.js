@@ -3,7 +3,7 @@ import SelectorPC from "./SelectorPC";
 import { graphql } from "react-apollo";
 import { getRecordsMutation } from "../../queries/queries";
 
-class DashboardCC extends Component {
+class SelectorCC extends Component {
   state = {
     blank: false,
     selectorOpen: true
@@ -15,5 +15,5 @@ class DashboardCC extends Component {
 }
 
 export default graphql(getRecordsMutation, { name: "getRecordsMutation" })(
-  DashboardCC
+  SelectorCC
 );

@@ -10,7 +10,6 @@ const env = process.env;
 
 require("dotenv").config();
 
-console.log("env pass", env.PASS);
 
 // allow cross-origin requests
 app.use(cors());

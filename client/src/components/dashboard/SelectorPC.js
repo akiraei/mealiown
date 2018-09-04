@@ -23,69 +23,22 @@ const cateOptions = [
   "Dinner",
   "Midnight"
 ];
-const cateDefault = [
-  "Breakfast",
-  "Brunch",
-  "Lunch",
-  "Snack",
-  "Dinner",
-  "Midnight"
-];
 const avgsOptions = ["Calories", "Balance", "Tasty", "Total"];
-const avgsDefault = ["Calories", "Balance", "Tasty", "Total"];
 
-class DashboardPC extends Component {
-  state = {
-    cateList: cateDefault,
-    avgsList: avgsDefault,
-    cateInd: true,
-    avgsInd: true,
-    cateAll: false,
-    avgsAll: false,
-    indeterminate: true,
-    checkAll: false,
-    open: false
-  };
-
-  CateChange = checkedList => {
-    this.setState({
-      cateList: checkedList,
-      cateInd: !!checkedList.length && checkedList.length < cateOptions.length,
-      cateAll: checkedList.length === cateOptions.length
-    });
-  };
-
-  CateAllChange = e => {
-    this.setState({
-      cateList: e.target.checked ? cateOptions : [],
-      cateInd: false,
-      cateAll: e.target.checked
-    });
-  };
-
-  AvgsChange = checkedList => {
-    this.setState({
-      avgsList: checkedList,
-      avgsInd: !!checkedList.length && checkedList.length < avgsOptions.length,
-      avgsAll: checkedList.length === avgsOptions.length
-    });
-  };
-
-  AvgsAllChange = e => {
-    this.setState({
-      avgsList: e.target.checked ? avgsOptions : [],
-      avgsInd: false,
-      avgsAll: e.target.checked
-    });
-  };
-
-  handleOpen = () => {
-    this.state.open
-      ? this.setState({ open: false })
-      : this.setState({ open: true });
-  };
-
+class SelectorPC extends Component {
   render() {
+    const obj = (() => {
+      let obj = {};
+      for (let i = 0; i < 9; i++) {
+        obj[i * 3] = (24 - i * 3).toString();
+      }
+      return obj;
+    })();
+
+    const marks = {
+      ...obj
+    };
+
     return (
       <React.Fragment>
         <div
@@ -94,12 +47,12 @@ class DashboardPC extends Component {
               "selector-container": true
             },
             {
-              "selector-open": this.state.open
+              "selector-open": this.props.open
             }
           )}
         >
           <div className={"selector-pseudoFooter"}>
-            <Button onClick={this.handleOpen}>Filter</Button>
+            <Button onClick={this.props.ofFilter.onOpen}>Filter</Button>
           </div>
 
           <div className={"selector-content"}>
@@ -109,11 +62,9 @@ class DashboardPC extends Component {
                   <div>Date Range</div>
                   <Radio.Group
                     className={"flex column justify"}
-                    onChange={e => {
-                      this.props.onChange(e)("category");
-                    }}
+                    onChange={this.props.ofFilter.onRadioChange}
                     buttonstyle={"solid"}
-                    value={this.props.category}
+                    value={this.props.daybefore}
                     size="small"
                   >
                     <div
@@ -121,7 +72,7 @@ class DashboardPC extends Component {
                     >
                       <Radio.Button
                         className={"selector-radio-button"}
-                        value={"Entire"}
+                        value={99999}
                       >
                         Entire
                       </Radio.Button>
@@ -197,9 +148,9 @@ class DashboardPC extends Component {
                   <div>Meal</div>
                   <div style={{ borderBottom: "1px solid #E9E9E9" }}>
                     <Checkbox
-                      indeterminate={this.state.cateInd}
-                      onChange={this.CateAllChange}
-                      checked={this.state.cateAll}
+                      indeterminate={this.props.cateInd}
+                      onChange={this.props.ofCate.onCateAll}
+                      checked={this.props.cateAll}
                     >
                       Check all
                     </Checkbox>
@@ -207,8 +158,8 @@ class DashboardPC extends Component {
                   <br />
                   <CheckboxGroup
                     options={cateOptions}
-                    value={this.state.cateList}
-                    onChange={this.CateChange}
+                    value={this.props.cateList}
+                    onChange={this.props.ofCate.onCateChange}
                   />
                 </div>
 
@@ -216,9 +167,9 @@ class DashboardPC extends Component {
                   <div>Avgs</div>
                   <div style={{ borderBottom: "1px solid #E9E9E9" }}>
                     <Checkbox
-                      indeterminate={this.state.avgsInd}
-                      onChange={this.AvgsAllChange}
-                      checked={this.state.avgsAll}
+                      indeterminate={this.props.avgsInd}
+                      onChange={this.props.ofAvgs.onAvgsAll}
+                      checked={this.props.avgsAll}
                     >
                       Check all
                     </Checkbox>
@@ -226,8 +177,8 @@ class DashboardPC extends Component {
                   <br />
                   <CheckboxGroup
                     options={avgsOptions}
-                    value={this.state.avgsList}
-                    onChange={this.AvgsChange}
+                    value={this.props.avgsList}
+                    onChange={this.props.ofAvgs.onAvgsChange}
                   />
                 </div>
               </div>
@@ -239,14 +190,29 @@ class DashboardPC extends Component {
                       style={{ height: (window.innerHeight / 10) * 5 }}
                       vertical
                       range
-                      defaultValue={[26, 37]}
+                      defaultValue={[0, 24]}
+                      max={24}
+                      min={0}
+                      tipFormatter={value => {
+                        return value === 24 ? "0" : 24 - value;
+                      }}
+                      // step={1}
+                      dots={false}
+                      marks={marks}
+                      onChange={this.props.ofFilter.onSliderChange}
                     />
                   </div>
                 </div>
               </div>
             </div>
             <div className={"selector-submit"}>
-              <Button>Submit</Button>
+              <Button
+                disabled={
+                  this.props.cateList.length * this.props.avgsList.length === 0
+                }
+              >
+                Submit
+              </Button>
             </div>
           </div>
         </div>
@@ -255,4 +221,4 @@ class DashboardPC extends Component {
   }
 }
 
-export default DashboardPC;
+export default SelectorPC;
