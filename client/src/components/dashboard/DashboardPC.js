@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Progress, Row, Col, Spin } from "antd";
 import SelectorCC from "./SelectorCC";
 import IndexPC from "./IndexPC";
+
+var classNames = require("classnames");
+
 class DashboardPC extends Component {
   render() {
     const width = document.body.offsetHeight / 6.3;
@@ -20,11 +23,20 @@ class DashboardPC extends Component {
           </div>
         ) : (
           <div className={"page-container page-filler"}>
-            <div className={"dashboard-index"}>
-              <IndexPC {...this.state} {...this.props} />
-            </div>
+            {this.props.submitted && (
+              <div className={"dashboard-index"}>
+                <IndexPC {...this.state} {...this.props} />
+              </div>
+            )}
 
-            <div className={"dashboard-box dashboard-slided"}>
+            <div
+              className={classNames(
+                { "dashboard-box": true },
+                {
+                  "dashboard-slided": this.props.submitted
+                }
+              )}
+            >
               <Row type="flex" justify="center" align="center">
                 <Col>
                   <Progress
@@ -47,7 +59,7 @@ class DashboardPC extends Component {
             <div className={"dashboard-box"}>
               {progressList.map(e => {
                 return (
-                  <div className={"dashboard-little"}>
+                  <div className={"dashboard-little"} key={e[0]}>
                     <div>
                       <Progress
                         strokeLinecap="square"

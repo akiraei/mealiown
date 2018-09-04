@@ -23,9 +23,74 @@ const cateOptions = [
   "Dinner",
   "Midnight"
 ];
+const cateDefault = [
+  "Breakfast",
+  "Brunch",
+  "Lunch",
+  "Snack",
+  "Dinner",
+  "Midnight"
+];
 const avgsOptions = ["Calories", "Balance", "Tasty", "Total"];
+const avgsDefault = ["Calories", "Balance", "Tasty", "Total"];
 
 class SelectorPC extends Component {
+  state = {
+    cateList: cateDefault,
+    avgsList: avgsDefault,
+    cateInd: true,
+    avgsInd: true,
+    cateAll: false,
+    avgsAll: false,
+    time: [0, 24],
+    daybefore: 99999
+  };
+
+  //----------------controll -------------------
+
+  CateChange = checkedList => {
+    this.setState({
+      cateList: checkedList,
+      cateInd: !!checkedList.length && checkedList.length < cateOptions.length,
+      cateAll: checkedList.length === cateOptions.length
+    });
+  };
+
+  CateAllChange = e => {
+    this.setState({
+      cateList: e.target.checked ? cateOptions : [],
+      cateInd: false,
+      cateAll: e.target.checked
+    });
+  };
+
+  AvgsChange = checkedList => {
+    this.setState({
+      avgsList: checkedList,
+      avgsInd: !!checkedList.length && checkedList.length < avgsOptions.length,
+      avgsAll: checkedList.length === avgsOptions.length
+    });
+  };
+
+  AvgsAllChange = e => {
+    this.setState({
+      avgsList: e.target.checked ? avgsOptions : [],
+      avgsInd: false,
+      avgsAll: e.target.checked
+    });
+  };
+
+  handleSliderChange = value => {
+    let arr = [];
+    arr.push(24 - value[1]);
+    arr.push(24 - value[0]);
+    this.setState({ time: arr });
+  };
+
+  handleRadioChange = e => {
+    this.setState({ daybefore: e.target.value });
+  };
+
   render() {
     const obj = (() => {
       let obj = {};
@@ -62,9 +127,9 @@ class SelectorPC extends Component {
                   <div>Date Range</div>
                   <Radio.Group
                     className={"flex column justify"}
-                    onChange={this.props.ofFilter.onRadioChange}
+                    onChange={this.handleRadioChange}
                     buttonstyle={"solid"}
-                    value={this.props.daybefore}
+                    value={this.state.daybefore}
                     size="small"
                   >
                     <div
@@ -148,9 +213,9 @@ class SelectorPC extends Component {
                   <div>Meal</div>
                   <div style={{ borderBottom: "1px solid #E9E9E9" }}>
                     <Checkbox
-                      indeterminate={this.props.cateInd}
-                      onChange={this.props.ofCate.onCateAll}
-                      checked={this.props.cateAll}
+                      indeterminate={this.state.cateInd}
+                      onChange={this.CateAllChange}
+                      checked={this.state.cateAll}
                     >
                       Check all
                     </Checkbox>
@@ -158,8 +223,8 @@ class SelectorPC extends Component {
                   <br />
                   <CheckboxGroup
                     options={cateOptions}
-                    value={this.props.cateList}
-                    onChange={this.props.ofCate.onCateChange}
+                    value={this.state.cateList}
+                    onChange={this.CateChange}
                   />
                 </div>
 
@@ -167,9 +232,9 @@ class SelectorPC extends Component {
                   <div>Avgs</div>
                   <div style={{ borderBottom: "1px solid #E9E9E9" }}>
                     <Checkbox
-                      indeterminate={this.props.avgsInd}
-                      onChange={this.props.ofAvgs.onAvgsAll}
-                      checked={this.props.avgsAll}
+                      indeterminate={this.state.avgsInd}
+                      onChange={this.AvgsAllChange}
+                      checked={this.state.avgsAll}
                     >
                       Check all
                     </Checkbox>
@@ -177,8 +242,8 @@ class SelectorPC extends Component {
                   <br />
                   <CheckboxGroup
                     options={avgsOptions}
-                    value={this.props.avgsList}
-                    onChange={this.props.ofAvgs.onAvgsChange}
+                    value={this.state.avgsList}
+                    onChange={this.AvgsChange}
                   />
                 </div>
               </div>
@@ -199,7 +264,7 @@ class SelectorPC extends Component {
                       // step={1}
                       dots={false}
                       marks={marks}
-                      onChange={this.props.ofFilter.onSliderChange}
+                      onChange={this.handleSliderChange}
                     />
                   </div>
                 </div>
@@ -208,8 +273,11 @@ class SelectorPC extends Component {
             <div className={"selector-submit"}>
               <Button
                 disabled={
-                  this.props.cateList.length * this.props.avgsList.length === 0
+                  this.state.cateList.length * this.state.avgsList.length === 0
                 }
+                onClick={() => {
+                  this.props.ofFilter.onSubmit({ ...this.state });
+                }}
               >
                 Submit
               </Button>

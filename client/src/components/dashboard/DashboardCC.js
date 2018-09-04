@@ -23,7 +23,6 @@ const cateDefault = [
 const avgsOptions = ["Calories", "Balance", "Tasty", "Total"];
 const avgsDefault = ["Calories", "Balance", "Tasty", "Total"];
 
-const filterSelectted = {};
 class DashboardCC extends Component {
   state = {
     count: 0,
@@ -39,10 +38,10 @@ class DashboardCC extends Component {
     avgsInd: true,
     cateAll: false,
     avgsAll: false,
-    open: false,
     time: [0, 24],
     daybefore: 99999,
 
+    open: false,
     submitted: false
   };
 
@@ -67,37 +66,7 @@ class DashboardCC extends Component {
     this.setState({ count, calAvg, balAvg, tastyAvg, sumAvg, loading: false });
   };
 
-  CateChange = checkedList => {
-    this.setState({
-      cateList: checkedList,
-      cateInd: !!checkedList.length && checkedList.length < cateOptions.length,
-      cateAll: checkedList.length === cateOptions.length
-    });
-  };
-
-  CateAllChange = e => {
-    this.setState({
-      cateList: e.target.checked ? cateOptions : [],
-      cateInd: false,
-      cateAll: e.target.checked
-    });
-  };
-
-  AvgsChange = checkedList => {
-    this.setState({
-      avgsList: checkedList,
-      avgsInd: !!checkedList.length && checkedList.length < avgsOptions.length,
-      avgsAll: checkedList.length === avgsOptions.length
-    });
-  };
-
-  AvgsAllChange = e => {
-    this.setState({
-      avgsList: e.target.checked ? avgsOptions : [],
-      avgsInd: false,
-      avgsAll: e.target.checked
-    });
-  };
+  //----------------filer -------------------
 
   handleOpen = () => {
     this.state.open
@@ -105,21 +74,12 @@ class DashboardCC extends Component {
       : this.setState({ open: true });
   };
 
-  handleSliderChange = value => {
-    let arr = [];
-    arr.push(24 - value[1]);
-    arr.push(24 - value[0]);
-    this.setState({ time: arr });
-  };
-
-  handleRadioChange = e => {
-    this.setState({ daybefore: e.target.value });
-  };
-
-  handleSubmit = () => {
+  handleSubmit = obj => {
     console.log("submit");
     this.setState({
-      submitted: true
+      submitted: true,
+      open: false,
+      ...obj
     });
   };
 
@@ -128,14 +88,6 @@ class DashboardCC extends Component {
       <DashboardPC
         {...this.props}
         {...this.state}
-        ofCate={{
-          onCateChange: this.CateChange,
-          onCateAll: this.CateAllChange
-        }}
-        ofAvgs={{
-          onAvgsChange: this.AvgsChange,
-          onAvgsAll: this.AvgsAllChange
-        }}
         ofFilter={{
           onOpen: this.handleOpen,
           onSliderChange: this.handleSliderChange,
