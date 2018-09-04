@@ -22,17 +22,21 @@ class LoginCC extends Component {
   };
 
   handleSubmit = async () => {
-    const res = await this.props.getTokenMutation({
-      variables: {
-        name: this.state.name,
-        pw: this.state.pw
+    try {
+      const res = await this.props.getTokenMutation({
+        variables: {
+          name: this.state.name,
+          pw: this.state.pw
+        }
+      });
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token.token);
+        this.setState({ success: true });
+        this.props.ProfileCTX.func.setUsername(this.state.name);
+      } else {
+        this.setState({ error: true });
       }
-    });
-    if (res.data.token) {
-      localStorage.setItem("token", res.data.token.token);
-      this.setState({ success: true });
-      this.props.ProfileCTX.func.setUsername(this.state.name);
-    } else {
+    } catch (e) {
       this.setState({ error: true });
     }
   };

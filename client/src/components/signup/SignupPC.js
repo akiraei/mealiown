@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Alert, Row, Col, Input } from "antd";
+import UploaderCC from "../Uploader/UploaderCC";
 
 class SignupPC extends Component {
   render() {
@@ -8,6 +9,11 @@ class SignupPC extends Component {
       <React.Fragment>
         <div className={"page-container page-filler"}>
           <div className={"signup-box"}>
+            {/* <Row type="flex" justify="center" align="center">
+              <Col>
+                <UploaderCC />
+              </Col>
+            </Row> */}
             <Row type="flex" justify="center" align="center">
               <Col>
                 <Input

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Progress, Row, Col, Spin } from "antd";
-
+import SelectorCC from "./SelectorCC";
 class DashboardPC extends Component {
   render() {
     const width = document.body.offsetHeight / 6.3;
@@ -105,6 +105,8 @@ class DashboardPC extends Component {
                 </Col>
               </Row>
             </div>
+
+            <SelectorCC {...this.props} {...this.state} />
           </div>
         )}
       </React.Fragment>

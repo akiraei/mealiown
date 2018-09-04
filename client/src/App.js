@@ -16,9 +16,12 @@ import RecordPage from "./pages/RecordPage";
 // import MainPage from "./pages/MainPage";
 import DashboardPage from "./pages/DashboardPage";
 
+require("dotenv").config();
+const env = process.env;
+
 // apollo client setup
 const client = new ApolloClient({
-  uri: "https://even-friction.glitch.me/graphql"
+  uri: `${env.REACT_APP_SERVER}`
 });
 
 class App extends Component {

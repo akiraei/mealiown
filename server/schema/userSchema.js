@@ -3,9 +3,12 @@ const User = require("../models/user");
 const Record = require("../models/record");
 const Token = require("../models/token");
 
+require("dotenv").config();
+
 const _ = require("lodash");
 var jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+
 const env = process.env;
 
 const {
