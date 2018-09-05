@@ -38,8 +38,14 @@ class IndexPC extends Component {
     return (
       <React.Fragment>
         <div className={"dashboard-index-box"}>
-          {this.props.daybefore > 9999 ? "Entire" : this.props.daybefore} /
-          time: {this.props.time[0]} ~ {this.props.time[1]}
+          <div className={"dashboard-index-times"}>
+            {this.props.daybefore > 9999
+              ? "Entire"
+              : this.props.daybefore.toString() + " days before"}
+          </div>
+          <div className={"dashboard-index-times"}>
+            Time: {this.props.time[0]} ~ {this.props.time[1]}
+          </div>
         </div>
         <div className={"dashboard-index-box"}>
           {this.props.cateList.map(e => {

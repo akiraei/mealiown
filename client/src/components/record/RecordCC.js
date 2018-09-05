@@ -15,7 +15,7 @@ class RecordCC extends Component {
     date: moment().format("YYYY/MM/DD"),
     time: moment().format("HH:mm"),
     count: 1,
-    memo: "",
+    // memo: "",
     modal: false
   };
 
@@ -63,7 +63,7 @@ class RecordCC extends Component {
       calories: this.state.calories,
       balance: this.state.balance,
       tasty: this.state.tasty,
-      memo: this.state.memo,
+      // memo: this.state.memo,
       modal: this.state.modal
     };
     const res = await this.props.saveRecordMutation({

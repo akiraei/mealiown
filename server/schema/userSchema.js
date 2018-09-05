@@ -50,8 +50,8 @@ const RecordType = new GraphQLObjectType({
     calories: { type: GraphQLInt },
     balance: { type: GraphQLInt },
     tasty: { type: GraphQLInt },
-    sum: { type: GraphQLInt },
-    memo: { type: GraphQLString }
+    sum: { type: GraphQLInt }
+    // memo: { type: GraphQLString }
   })
 });
 
@@ -265,8 +265,8 @@ const Mutation = new GraphQLObjectType({
         time: { type: GraphQLString },
         calories: { type: GraphQLInt },
         balance: { type: GraphQLInt },
-        tasty: { type: GraphQLInt },
-        memo: { type: GraphQLString }
+        tasty: { type: GraphQLInt }
+        // memo: { type: GraphQLString }
       },
       async resolve(parent, args) {
         const value = await Record.find({ name: args.name });
@@ -285,7 +285,7 @@ const Mutation = new GraphQLObjectType({
           calories: args.calories,
           balance: args.balance,
           tasty: args.tasty,
-          memo: args.memo,
+          // memo: args.memo,
           sum:
             args.calories + args.balance + args.tasty > 1000
               ? 1000

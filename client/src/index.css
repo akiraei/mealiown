@@ -351,15 +351,14 @@ body {
 
 .dashboard-index {
   position: absolute;
-  padding: 10px 12px 10px 12px;
+  padding: 4px;
   z-index: 100;
   top: 4.6875rem;
   left: 0.625rem;
   width: 8.75rem;
   height: 10rem;
   font-size: 0.8rem;
-  background-color: rgba(133, 133, 133, 0.253);
-  border-radius: 0.9375rem;
+  border-radius: 0.9rem;
 }
 
 .dashboard-index-box {
@@ -371,6 +370,10 @@ body {
   padding: 4px;
   line-height: 12px;
   margin: 0px;
+}
+
+.dashboard-index-times {
+  font-weight: bold;
 }
 
 .dashboard-little {
