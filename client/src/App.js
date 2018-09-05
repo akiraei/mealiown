@@ -18,7 +18,6 @@ import DashboardPage from "./pages/DashboardPage";
 
 require("dotenv").config();
 const env = process.env;
-
 // apollo client setup
 const client = new ApolloClient({
   uri: `${env.REACT_APP_SERVER}`
