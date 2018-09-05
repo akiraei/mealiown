@@ -77,16 +77,29 @@ class DashboardCC extends Component {
 
     const data = res.data.filtered;
 
-    this.setState({
-      submitted: true,
-      open: false,
-      count: data.count,
-      calAvg: data.calories,
-      balAvg: data.balance,
-      tastyAvg: data.tasty,
-      sumAvg: data.sum,
-      ...obj
-    });
+    if (data) {
+      this.setState({
+        submitted: true,
+        open: false,
+        count: data.count ? data.count : 0,
+        calAvg: data.calories ? data.calories : 0,
+        balAvg: data.balance ? data.balance : 0,
+        tastyAvg: data.tasty ? data.tasty : 0,
+        sumAvg: data.sum ? data.sum : 0,
+        ...obj
+      });
+    } else {
+      this.setState({
+        submitted: true,
+        open: false,
+        count: 0,
+        calAvg: 0,
+        balAvg: 0,
+        tastyAvg: 0,
+        sumAvg: 0,
+        ...obj
+      });
+    }
   };
 
   render() {
