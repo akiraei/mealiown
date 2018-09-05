@@ -8,6 +8,9 @@ const app = express();
 
 const env = process.env;
 
+require("dotenv").config();
+
+
 // allow cross-origin requests
 app.use(cors());
 
