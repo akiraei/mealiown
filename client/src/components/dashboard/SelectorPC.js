@@ -31,8 +31,8 @@ const cateDefault = [
   "Dinner",
   "Midnight"
 ];
-const avgsOptions = ["Calories", "Balance", "Tasty", "Total"];
-const avgsDefault = ["Calories", "Balance", "Tasty", "Total"];
+const avgsOptions = ["Calories", "Balance", "Tasty", "Sum"];
+const avgsDefault = ["Calories", "Balance", "Tasty", "Sum"];
 
 class SelectorPC extends Component {
   state = {

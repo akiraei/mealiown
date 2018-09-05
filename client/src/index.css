@@ -332,6 +332,15 @@ body {
       flex-wrap: wrap;
 }
 
+.dashboard-nowrap {
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .dashboard-slided {
   margin: 0px 0px 0px 45vw;
 }
@@ -502,7 +511,7 @@ body {
 }
 
 .selector-content {
-  padding: 30px 20px 30px 20px;
+  padding: 10px 20px 30px 20px;
 }
 
 .selector-controller {

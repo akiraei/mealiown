@@ -6,6 +6,10 @@
     align-items: center;
     flex-wrap: wrap;
   }
+  &-nowrap {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
   &-slided {
     margin: 0px 0px 0px 45vw;
   }

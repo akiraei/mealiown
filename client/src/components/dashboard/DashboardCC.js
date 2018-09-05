@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DashboardPC from "./DashboardPC";
 import { graphql, compose } from "react-apollo";
-import { getRecordsMutation } from "../../queries/queries";
+import { getRecordsMutation, getFilteredMutation } from "../../queries/queries";
 import withProfile from "../../hocs/withProfile";
 
 const cateOptions = [
@@ -20,8 +20,8 @@ const cateDefault = [
   "Dinner",
   "Midnight"
 ];
-const avgsOptions = ["Calories", "Balance", "Tasty", "Total"];
-const avgsDefault = ["Calories", "Balance", "Tasty", "Total"];
+const avgsOptions = ["Calories", "Balance", "Tasty", "Sum"];
+const avgsDefault = ["Calories", "Balance", "Tasty", "Sum"];
 
 class DashboardCC extends Component {
   state = {
@@ -30,7 +30,6 @@ class DashboardCC extends Component {
     balAvg: 0,
     tastyAvg: 0,
     sumAvg: 0,
-    loading: true,
 
     cateList: cateDefault,
     avgsList: avgsDefault,
@@ -41,6 +40,7 @@ class DashboardCC extends Component {
     time: [0, 24],
     daybefore: 99999,
 
+    loading: true,
     open: false,
     submitted: false
   };
@@ -52,17 +52,6 @@ class DashboardCC extends Component {
       }
     });
     const obj = res.data.records;
-    // const count = arr.length
-    //   ? res.data.records.sort((a, b) => b.count - a.count)[0].count
-    //   : 0;
-    // const calAvg =
-    //   count && parseInt(arr.reduce((acu, cv) => acu + cv.calories, 0) / count);
-    // const balAvg =
-    //   count && parseInt(arr.reduce((acu, cv) => acu + cv.balance, 0) / count);
-    // const tastyAvg =
-    //   count && parseInt(arr.reduce((acu, cv) => acu + cv.tasty, 0) / count);
-    // const sumAvg =
-    //   count && parseInt(arr.reduce((acu, cv) => acu + cv.sum, 0) / count);
     this.setState({ ...obj, loading: false });
   };
 
@@ -74,11 +63,28 @@ class DashboardCC extends Component {
       : this.setState({ open: true });
   };
 
-  handleSubmit = obj => {
-    console.log("submit");
+  handleSubmit = async obj => {
+    const res = await this.props.getFilteredMutation({
+      variables: {
+        token: localStorage.getItem("token"),
+        cate: obj.cateList.join("/"),
+        avgs: obj.avgsList.map(e => e.toLowerCase()).join("/"),
+        daybefore: obj.daybefore,
+        starttime: obj.time[0],
+        endtime: obj.time[1]
+      }
+    });
+
+    const data = res.data.filtered;
+
     this.setState({
       submitted: true,
       open: false,
+      count: data.count,
+      calAvg: data.calories,
+      balAvg: data.balance,
+      tastyAvg: data.tasty,
+      sumAvg: data.sum,
       ...obj
     });
   };

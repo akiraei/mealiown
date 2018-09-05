@@ -7,13 +7,16 @@ var classNames = require("classnames");
 
 class DashboardPC extends Component {
   render() {
-    const width = document.body.offsetHeight / 6.3;
+    const width =
+      this.props.avgsList.length < 3
+        ? document.body.offsetHeight / 5.8
+        : document.body.offsetHeight / 6.3;
     const bigone = document.body.offsetHeight / 4.2;
     const progressList = [
-      ["calAvg", "Avg.Colories"],
-      ["balAvg", "Avg.Balance"],
-      ["tastyAvg", "Avg.Tasty"],
-      ["sumAvg", "Avg.pt"]
+      ["calAvg", "Avg.Calories", "Calories"],
+      ["balAvg", "Avg.Balance", "Balance"],
+      ["tastyAvg", "Avg.Tasty", "Tasty"],
+      ["sumAvg", "Avg.pt", "Sum"]
     ];
     return (
       <React.Fragment>
@@ -56,22 +59,29 @@ class DashboardPC extends Component {
               </Row>
             </div>
 
-            <div className={"dashboard-box"}>
+            <div
+              className={classNames(
+                { "dashboard-box": true },
+                { "dashboard-nowrap": this.props.avgsList.length < 3 }
+              )}
+            >
               {progressList.map(e => {
-                return (
-                  <div className={"dashboard-little"} key={e[0]}>
-                    <div>
-                      <Progress
-                        strokeLinecap="square"
-                        type="dashboard"
-                        percent={this.props[`${e[0]}`] / 10}
-                        width={width}
-                        format={percent => `${percent * 10} point`}
-                      />
+                if (this.props.avgsList.find(ele => ele === e[2])) {
+                  return (
+                    <div className={"dashboard-little"} key={e[0]}>
+                      <div>
+                        <Progress
+                          strokeLinecap="square"
+                          type="dashboard"
+                          percent={this.props[`${e[0]}`] / 10}
+                          width={width}
+                          format={percent => `${percent * 10} point`}
+                        />
+                      </div>
+                      <div>{e[1]}</div>
                     </div>
-                    <div>{e[1]}</div>
-                  </div>
-                );
+                  );
+                }
               })}
             </div>
 
