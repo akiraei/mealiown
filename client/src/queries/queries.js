@@ -59,16 +59,37 @@ const saveRecordMutation = gql`
 const getRecordsMutation = gql`
   mutation GetRecordsMutation($token: String) {
     records(token: $token) {
-      name
       count
-      category
-      date
-      time
+      calAvg
+      balAvg
+      tastyAvg
+      sumAvg
+    }
+  }
+`;
+
+const getFilteredMutation = gql`
+  mutation GetFilteredMutation(
+    $token: String
+    $cate: String
+    $avgs: String
+    $starttime: Int
+    $endtime: Int
+    $daybefore: Int
+  ) {
+    filtered(
+      token: $token
+      cate: $cate
+      avgs: $avgs
+      starttime: $starttime
+      endtime: $endtime
+      daybefore: $daybefore
+    ) {
+      count
       calories
       balance
       tasty
       sum
-      memo
     }
   }
 `;
@@ -78,5 +99,6 @@ export {
   verifyTokenMutation,
   saveRecordMutation,
   getRecordsMutation,
-  saveUserMutation
+  saveUserMutation,
+  getFilteredMutation
 };

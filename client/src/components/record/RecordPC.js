@@ -210,10 +210,10 @@ class RecordPC extends Component {
                   ? 1000
                   : this.props.calories + this.props.balance + this.props.tasty}
               </div>
-              <div className={"result-row"}>
+              {/* <div className={"result-row"}>
                 Memo
                 <Input.TextArea autosize={{ minRows: 5, maxRows: 5 }} />
-              </div>
+              </div> */}
               <div className={"result-row"}>
                 <Row type="flex" justify="center" align="top">
                   <Col>

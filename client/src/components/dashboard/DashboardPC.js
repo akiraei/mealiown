@@ -13,7 +13,7 @@ class DashboardPC extends Component {
       ["calAvg", "Avg.Colories"],
       ["balAvg", "Avg.Balance"],
       ["tastyAvg", "Avg.Tasty"],
-      ["sumAbg", "Avg.pt"]
+      ["sumAvg", "Avg.pt"]
     ];
     return (
       <React.Fragment>

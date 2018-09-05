@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DashboardPC from "./DashboardPC";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import { getRecordsMutation } from "../../queries/queries";
 import withProfile from "../../hocs/withProfile";
 
@@ -51,19 +51,19 @@ class DashboardCC extends Component {
         token: localStorage.getItem("token")
       }
     });
-    const arr = res.data.records;
-    const count = arr.length
-      ? res.data.records.sort((a, b) => b.count - a.count)[0].count
-      : 0;
-    const calAvg =
-      count && parseInt(arr.reduce((acu, cv) => acu + cv.calories, 0) / count);
-    const balAvg =
-      count && parseInt(arr.reduce((acu, cv) => acu + cv.balance, 0) / count);
-    const tastyAvg =
-      count && parseInt(arr.reduce((acu, cv) => acu + cv.tasty, 0) / count);
-    const sumAvg =
-      count && parseInt(arr.reduce((acu, cv) => acu + cv.sum, 0) / count);
-    this.setState({ count, calAvg, balAvg, tastyAvg, sumAvg, loading: false });
+    const obj = res.data.records;
+    // const count = arr.length
+    //   ? res.data.records.sort((a, b) => b.count - a.count)[0].count
+    //   : 0;
+    // const calAvg =
+    //   count && parseInt(arr.reduce((acu, cv) => acu + cv.calories, 0) / count);
+    // const balAvg =
+    //   count && parseInt(arr.reduce((acu, cv) => acu + cv.balance, 0) / count);
+    // const tastyAvg =
+    //   count && parseInt(arr.reduce((acu, cv) => acu + cv.tasty, 0) / count);
+    // const sumAvg =
+    //   count && parseInt(arr.reduce((acu, cv) => acu + cv.sum, 0) / count);
+    this.setState({ ...obj, loading: false });
   };
 
   //----------------filer -------------------
@@ -99,6 +99,7 @@ class DashboardCC extends Component {
   }
 }
 
-export default graphql(getRecordsMutation, { name: "getRecordsMutation" })(
-  withProfile(DashboardCC)
-);
+export default compose(
+  graphql(getRecordsMutation, { name: "getRecordsMutation" }),
+  graphql(getFilteredMutation, { name: "getFilteredMutation" })
+)(withProfile(DashboardCC));

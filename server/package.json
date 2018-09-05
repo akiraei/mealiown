@@ -17,7 +17,8 @@
     "graphql": "^0.13.1",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.5",
-    "mongoose": "^5.0.9"
+    "mongoose": "^5.0.9",
+    "moment": "^2.22.2"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^2.6.1",
