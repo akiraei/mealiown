@@ -158,11 +158,11 @@ const Mutation = new GraphQLObjectType({
             : 0;
 
         const obj = {
-          count,
-          calAvg,
-          balAvg,
-          tastyAvg,
-          sumAvg
+          count: count,
+          calAvg: Math.ceil(calAvg),
+          balAvg: Math.ceil(balAvg),
+          tastyAvg: Math.ceil(tastyAvg),
+          sumAvg: Math.ceil(sumAvg)
         };
 
         return obj;
@@ -220,7 +220,7 @@ const Mutation = new GraphQLObjectType({
                   .subtract(args.daybefore, "days")
                   .format("x")
               );
-
+              
               let filterTriple = [];
               filterTwice.forEach(element => {
                 let result = 0;
@@ -228,6 +228,8 @@ const Mutation = new GraphQLObjectType({
                 date >= initDay && result++;
                 result > 0 && filterTriple.push(element);
               });
+              
+              const count = filterTriple.length
 
               let obj = {};
               avgs.forEach(e => {
@@ -235,10 +237,10 @@ const Mutation = new GraphQLObjectType({
                   (sum, ele) => sum + ele[`${e}`],
                   0
                 );
-                const assigny = { [e]: result };
+                const assigny = { [e]: Math.ceil(result/count) };
                 Object.assign(obj, assigny);
               });
-              Object.assign(obj, { count: filterTriple.length });
+              Object.assign(obj, { count: count });
 
               return obj;
             }
