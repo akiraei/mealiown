@@ -3,9 +3,13 @@ const User = require("../models/user");
 const Record = require("../models/record");
 const Token = require("../models/token");
 
+require("dotenv").config();
+
 const _ = require("lodash");
 var jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+var moment = require("moment");
+
 const env = process.env;
 
 const {
@@ -46,8 +50,8 @@ const RecordType = new GraphQLObjectType({
     calories: { type: GraphQLInt },
     balance: { type: GraphQLInt },
     tasty: { type: GraphQLInt },
-    sum: { type: GraphQLInt },
-    memo: { type: GraphQLString }
+    sum: { type: GraphQLInt }
+    // memo: { type: GraphQLString }
   })
 });
 
@@ -117,14 +121,131 @@ const Mutation = new GraphQLObjectType({
       }
     },
     records: {
-      type: new GraphQLList(RecordType),
+      type: new GraphQLObjectType({
+        name: "initRecords",
+        fields: () => ({
+          count: { type: GraphQLInt },
+          calAvg: { type: GraphQLInt },
+          balAvg: { type: GraphQLInt },
+          tastyAvg: { type: GraphQLInt },
+          sumAvg: { type: GraphQLInt }
+        })
+      }),
       args: {
         token: { type: GraphQLString }
       },
       async resolve(parent, args) {
         const value = jwt.verify(args.token, env.TOKEN);
         const arr = await Record.find({ name: value.name });
-        return arr;
+
+        const count =
+          arr.length > 0 ? arr.sort((a, b) => b.count - a.count)[0].count : 0;
+        const calAvg =
+          count > 0
+            ? parseInt(arr.reduce((acu, cv) => acu + cv.calories, 0) / count)
+            : 0;
+        const balAvg =
+          count > 0
+            ? parseInt(arr.reduce((acu, cv) => acu + cv.balance, 0) / count)
+            : 0;
+        const tastyAvg =
+          count > 0
+            ? parseInt(arr.reduce((acu, cv) => acu + cv.tasty, 0) / count)
+            : 0;
+        const sumAvg =
+          count > 0
+            ? parseInt(arr.reduce((acu, cv) => acu + cv.sum, 0) / count)
+            : 0;
+
+        const obj = {
+          count: count,
+          calAvg: Math.ceil(calAvg),
+          balAvg: Math.ceil(balAvg),
+          tastyAvg: Math.ceil(tastyAvg),
+          sumAvg: Math.ceil(sumAvg)
+        };
+
+        return obj;
+      }
+    },
+    filtered: {
+      type: new GraphQLObjectType({
+        name: "filtered",
+        fields: () => ({
+          count: { type: GraphQLInt },
+          calories: { type: GraphQLInt },
+          balance: { type: GraphQLInt },
+          tasty: { type: GraphQLInt },
+          sum: { type: GraphQLInt }
+        })
+      }),
+      args: {
+        token: { type: GraphQLString },
+        cate: { type: GraphQLString },
+        avgs: { type: GraphQLString },
+        starttime: { type: GraphQLInt },
+        endtime: { type: GraphQLInt },
+        daybefore: { type: GraphQLInt }
+      },
+      async resolve(parent, args) {
+        const value = jwt.verify(args.token, env.TOKEN);
+        const res = await Record.find({ name: value.name });
+
+        const cate = args.cate.split("/");
+        const avgs = args.avgs.split("/");
+
+        if (res.length > 0) {
+          let filterOnce = [];
+          res.forEach(element => {
+            let result = 0;
+            cate.forEach(e => {
+              element.category === e && result++;
+            });
+            result > 0 && filterOnce.push(element);
+          });
+
+          if (filterOnce.length > 0) {
+            let filterTwice = [];
+            filterOnce.forEach(element => {
+              let result = 0;
+              const timeArr = element.time.split(":");
+              const hour = parseInt(timeArr[0]);
+              hour >= args.starttime && hour < args.endtime && result++;
+              result > 0 && filterTwice.push(element);
+            });
+
+            if (filterTwice.length > 0) {
+              const initDay = parseInt(
+                moment()
+                  .subtract(args.daybefore, "days")
+                  .format("x")
+              );
+              
+              let filterTriple = [];
+              filterTwice.forEach(element => {
+                let result = 0;
+                const date = parseInt(moment(element.date).format("x"));
+                date >= initDay && result++;
+                result > 0 && filterTriple.push(element);
+              });
+              
+              const count = filterTriple.length
+
+              let obj = {};
+              avgs.forEach(e => {
+                const result = filterTriple.reduce(
+                  (sum, ele) => sum + ele[`${e}`],
+                  0
+                );
+                const assigny = { [e]: Math.ceil(result/count) };
+                Object.assign(obj, assigny);
+              });
+              Object.assign(obj, { count: count });
+
+              return obj;
+            }
+          }
+        }
       }
     },
     sign: {
@@ -146,8 +267,8 @@ const Mutation = new GraphQLObjectType({
         time: { type: GraphQLString },
         calories: { type: GraphQLInt },
         balance: { type: GraphQLInt },
-        tasty: { type: GraphQLInt },
-        memo: { type: GraphQLString }
+        tasty: { type: GraphQLInt }
+        // memo: { type: GraphQLString }
       },
       async resolve(parent, args) {
         const value = await Record.find({ name: args.name });
@@ -166,7 +287,7 @@ const Mutation = new GraphQLObjectType({
           calories: args.calories,
           balance: args.balance,
           tasty: args.tasty,
-          memo: args.memo,
+          // memo: args.memo,
           sum:
             args.calories + args.balance + args.tasty > 1000
               ? 1000

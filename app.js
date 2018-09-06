@@ -8,8 +8,11 @@ const app = express();
 
 const env = process.env;
 
+// require("dotenv").config();
+
+
 // allow cross-origin requests
-app.use(cors());
+// app.use(cors());
 
 // connect to mlab database
 // make sure to replace my db string & creds with your own

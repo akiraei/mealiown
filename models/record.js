@@ -10,8 +10,8 @@ const recordSchema = new Schema({
   calories: Number,
   balance: Number,
   tasty: Number,
-  sum: Number,
-  memo: String
+  sum: Number
+  // memo: String
 });
 
 module.exports = mongoose.model("Record", recordSchema);
